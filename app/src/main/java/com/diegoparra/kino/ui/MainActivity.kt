@@ -1,4 +1,4 @@
-package com.diegoparra.kino
+package com.diegoparra.kino.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,9 +12,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            KinoTheme {
-                KinoApp()
-            }
+            KinoApp()
         }
     }
 }

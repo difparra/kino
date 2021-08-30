@@ -1,4 +1,4 @@
-package com.diegoparra.kino.viewmodels
+package com.diegoparra.kino.ui.home
 
 import androidx.lifecycle.*
 import com.diegoparra.kino.data.MoviesRepository
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MoviesViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val moviesRepo: MoviesRepository
 ) : ViewModel() {
 

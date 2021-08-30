@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.diegoparra.kino"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -129,7 +129,7 @@ dependencies {
     //implementation "androidx.compose.runtime:runtime:$compose_version"
 
     // Navigation libraries
-    implementation "androidx.navigation:navigation-compose:2.4.0-alpha06"
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha07"
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
 
 
