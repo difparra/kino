@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
     private val _failure = MutableStateFlow<Event<Throwable>?>(null)
     val failure: Flow<Event<Throwable>?> = _failure
 
-    private val _loading = MutableStateFlow<Boolean>(false)
+    private val _loading = MutableStateFlow(false)
     val loading: Flow<Boolean> = _loading
 
     private val _genres = MutableStateFlow<List<Genre>>(emptyList())
@@ -40,11 +40,14 @@ class HomeViewModel @Inject constructor(
     //      ---------   Loading movies by genre
 
     private val _genresAndMovies = _genres.map { genres ->
-        genres.map { genre ->
+        _loading.value = true
+        val result = genres.map { genre ->
             moviesRepo.getMoviesByGenre(genre.id)
                 .map { GenreWithMovies(genre, it) }
                 .toResource()
         }
+        _loading.value = false
+        result
     }
 
     val genreAndMovies = _genresAndMovies

@@ -1,11 +1,11 @@
 package com.diegoparra.kino.ui.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -13,21 +13,20 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import coil.transform.RoundedCornersTransformation
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.GenreWithMovies
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.ui.GenresFakes
 import com.diegoparra.kino.ui.theme.Dimens
+import com.diegoparra.kino.ui.utils.BasicErrorMessage
+import com.diegoparra.kino.ui.utils.BasicLoading
 import com.diegoparra.kino.utils.Resource
-import com.diegoparra.kino.R
+import com.diegoparra.kino.ui.utils.KinoImage
 
 @Composable
 fun HomeScreen(
@@ -37,9 +36,7 @@ fun HomeScreen(
     //  Render loading state
     val loading by viewModel.loading.collectAsState(initial = false)
     if (loading) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            CircularProgressIndicator()
-        }
+        BasicLoading()
     }
 
     //  Render success case
@@ -52,7 +49,7 @@ fun HomeScreen(
     //  Render failure case
     val failure by viewModel.failure.collectAsState(initial = null)
     failure?.getContentIfNotHandled()?.let {
-        Text(text = "Some failure has happened. \nClass: ${it.javaClass}\nMessage: ${it.message}")
+        BasicErrorMessage(throwable = it)
     }
 
     //  Navigate to details screen
@@ -116,22 +113,10 @@ fun MovieThumbnail(
         modifier = Modifier
             .width(100.dp)
             .height(150.dp)
+            .clip(RoundedCornerShape(5.dp))
             .clickable { onMovieClick(movie.id) }
     ) {
-        Image(
-            painter = rememberImagePainter(
-                data = movie.posterUrl,
-                builder = {
-                    placeholder(R.drawable.loading_animation)
-                    error(R.drawable.ic_broken_image)
-                    crossfade(true)
-                    transformations(
-                        RoundedCornersTransformation(20f)
-                    )
-                }
-            ),
-            contentDescription = movie.title
-        )
+        KinoImage(imageUrl = movie.posterUrl)
     }
 }
 

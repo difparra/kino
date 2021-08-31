@@ -4,4 +4,12 @@
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_favs">Favourites</string>
+
+    <string name="label_back">Back</string>
+    <string name="see_more">See more</string>
+    <string name="see_less">See less</string>
+
+    <string name="overview">Overview</string>
+
+
 </resources>

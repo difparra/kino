@@ -14,7 +14,7 @@ object MoviesFakes {
         backdropUrl = "https://image.tmdb.org/t/p/original/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
         overview = "Un grupo de super villanos se encuentran encerrados en Belle Reve, una prisión de alta seguridad con la tasa de mortalidad más alta de Estados Unidos. Para salir de allí harán cualquier cosa, incluso unirse al grupo Task Force X, dedicado a llevar a cabo misiones suicidas bajo las órdenes de Amanda Waller. Fuertemente armados son enviados a la isla Corto Maltese, una jungla repleta de enemigos.",
         genreIds = listOf("28", "12", "14", "35"),
-        rating = 8.0f,
+        rating = 80,
         releaseDate = LocalDate.of(2021, 7, 28),
         runtimeMinutes = 132
     )
@@ -26,7 +26,7 @@ object MoviesFakes {
         backdropUrl = "https://image.tmdb.org/t/p/original/7WJjFviFBffEJvkAms4uWwbcVUk.jpg",
         overview = "Principios del siglo XX. Frank (Dwayne Johnson) es el carismático capitán de una peculiar embarcación que recorre la selva amazónica. Allí, a pesar de los peligros que el río Amazonas les tiene preparados, Frank llevará en su barco a la científica Lily Houghton (Emily Blunt) y a su hermano McGregor Houghton (Jack Whitehall). Su misión será encontrar un árbol místico que podría tener poderes curativos. Claro que su objetivo no será fácil, y en su aventura se encontrarán con toda clase de dificultades, además de una expedición alemana que busca también este árbol con propiedades curativas. Esta comedia de acción y aventuras está basada en la atracción Jungle Cruise de los parques de ocio de Disney.",
         genreIds = listOf("12", "14", "35", "28"),
-        rating = 7.9f,
+        rating = 79,
         releaseDate = LocalDate.of(2021,7,28),
         runtimeMinutes = 127
     )

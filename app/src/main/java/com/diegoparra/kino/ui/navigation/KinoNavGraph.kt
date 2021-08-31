@@ -69,7 +69,7 @@ fun KinoNavGraph(
             val movieViewModel: MovieViewModel = hiltViewModel()
             MovieScreen(
                 viewModel = movieViewModel,
-                navigateBack = actions.upPress
+                navigateUp = actions.upPress
             )
         }
 

@@ -1,5 +1,6 @@
 package com.diegoparra.kino.models
 
+import androidx.annotation.IntRange
 import java.time.LocalDate
 
 data class Movie(
@@ -9,7 +10,7 @@ data class Movie(
     val backdropUrl: String = posterUrl,
     val overview: String,
     val genreIds: List<String>,
-    val rating: Float?,
+    @IntRange(from = 0, to = 100) val rating: Int?,
     val releaseDate: LocalDate?,
     val runtimeMinutes: Int?
 ) {

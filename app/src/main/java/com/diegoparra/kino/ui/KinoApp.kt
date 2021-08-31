@@ -5,7 +5,6 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.diegoparra.kino.ui.home.HomeScreen
 import com.diegoparra.kino.ui.navigation.KinoBottomNavBar
 import com.diegoparra.kino.ui.navigation.KinoNavGraph
 import com.diegoparra.kino.ui.theme.KinoTheme
@@ -14,7 +13,6 @@ import com.diegoparra.kino.ui.theme.KinoTheme
 fun KinoApp() {
     KinoTheme {
         val navController = rememberNavController()
-
         Scaffold(
             bottomBar = { KinoBottomNavBar(navController = navController) }
         ) { innerPaddingModifier ->

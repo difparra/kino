@@ -26,7 +26,7 @@ object DtoTransformations {
         backdropUrl = IMAGE_URL_PREFIX + backdropPath,
         overview = overview ?: "No description",
         genreIds = genreIds ?: emptyList(),
-        rating = voteAverage,
+        rating = voteAverage?.let { (it*10).toInt() },
         releaseDate = releaseDate?.let { LocalDate.parse(it) },
         runtimeMinutes = null
     )
@@ -39,7 +39,7 @@ object DtoTransformations {
         backdropUrl = IMAGE_URL_PREFIX + backdropPath,
         overview = overview ?: "No description",
         genreIds = genres?.map { it.id } ?: emptyList(),
-        rating = voteAverage,
+        rating = voteAverage?.let { (it*10).toInt() },
         releaseDate = releaseDate?.let { LocalDate.parse(it) },
         runtimeMinutes = runtime
     )
