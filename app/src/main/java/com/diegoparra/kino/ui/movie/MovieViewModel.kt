@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,6 +25,8 @@ class MovieViewModel @Inject constructor(
 
     private val _movieId = savedStateHandle.get<String>(MOVIE_ID_KEY)!!
 
+    //      ----------      MOVIE       ------------------------------------------------------------
+
     private val _movie = MutableStateFlow<Resource<Movie>>(Resource.Loading)
     val movie: Flow<Resource<Movie>> = _movie
 
@@ -33,6 +36,8 @@ class MovieViewModel @Inject constructor(
             _movie.value = moviesRepo.getMovieById(_movieId).toResource()
         }
     }
+
+    //      ----------      GENRES NAMES        ----------------------------------------------------
 
     private val _genres = MutableStateFlow<List<Genre>>(emptyList())
 
@@ -54,6 +59,20 @@ class MovieViewModel @Inject constructor(
             emptyList()
         }
     }
+
+
+    //      ----------      IS FAVOURITE        ----------------------------------------------------
+
+    val isFavourite: Flow<Boolean> =
+        moviesRepo.isFavourite(_movieId)
+            .map { it.getOrDefault(false) }
+
+    fun toggleFavourite() {
+        viewModelScope.launch {
+            moviesRepo.toggleFavourite(_movieId)
+        }
+    }
+
 
     companion object {
         const val MOVIE_ID_KEY = "movieId"

@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.StarOutline
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +30,8 @@ import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.ui.theme.KinoTheme
 import com.diegoparra.kino.ui.utils.*
 
+private val APP_BAR_HEIGHT = 250.dp
+
 @Composable
 fun MovieScreen(
     viewModel: MovieViewModel,
@@ -35,12 +39,15 @@ fun MovieScreen(
 ) {
     val movieResource by viewModel.movie.collectAsState(initial = Resource.Loading)
     val genreNames by viewModel.genreNames.collectAsState(initial = emptyList())
+    val isFavourite by viewModel.isFavourite.collectAsState(initial = false)
 
     when (movieResource) {
         is Resource.Loading -> BasicLoading()
         is Resource.Success -> MovieScreen(
             movie = (movieResource as Resource.Success<Movie>).data,
             genreNames = genreNames,
+            isFavourite = isFavourite,
+            toggleFavourite = viewModel::toggleFavourite,
             navigateUp = navigateUp
         )
         is Resource.Error -> BasicErrorMessage(throwable = (movieResource as Resource.Error).failure)
@@ -51,12 +58,24 @@ fun MovieScreen(
 fun MovieScreen(
     movie: Movie,
     genreNames: List<String>,
+    isFavourite: Boolean,
+    toggleFavourite: () -> Unit,
     navigateUp: () -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        val scrollState = rememberScrollState(0)
-        AppBar(backdropUrl = movie.backdropUrl, title = movie.title, navigateUp = navigateUp)
-        Body(movie = movie, genreNames = genreNames, scroll = scrollState)
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            val scrollState = rememberScrollState(0)
+            AppBar(backdropUrl = movie.backdropUrl, title = movie.title, navigateUp = navigateUp)
+            Body(movie = movie, genreNames = genreNames, scroll = scrollState)
+        }
+        Box(
+            modifier = Modifier
+                .height(APP_BAR_HEIGHT)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            FavouriteButton(isFavourite = isFavourite, onClick = toggleFavourite)
+        }
     }
 }
 
@@ -65,12 +84,10 @@ private fun AppBar(backdropUrl: String, title: String, navigateUp: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
+            .height(APP_BAR_HEIGHT)
     ) {
         ImageCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp),
+            modifier = Modifier.fillMaxSize(),
             imageUrl = backdropUrl,
             title = title
         )
@@ -124,6 +141,16 @@ private fun ImageCard(modifier: Modifier = Modifier, imageUrl: String, title: St
                 color = Color.White
             )
         }
+    }
+}
+
+@Composable
+private fun FavouriteButton(isFavourite: Boolean, onClick: () -> Unit) {
+    FloatingActionButton(onClick = onClick) {
+        Icon(
+            imageVector = if(isFavourite) Icons.Default.Star else Icons.Default.StarOutline,
+            contentDescription = stringResource(id = R.string.menu_favs)
+        )
     }
 }
 
@@ -199,6 +226,8 @@ fun MovieScreenPreview() {
         MovieScreen(
             movie = MoviesFakes.SuicideSquad,
             genreNames = listOf("Action", "Adventure", "Comedy"),
+            isFavourite = false,
+            toggleFavourite = {},
             navigateUp = {})
     }
 }
