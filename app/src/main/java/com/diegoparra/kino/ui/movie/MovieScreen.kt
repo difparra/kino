@@ -28,7 +28,7 @@ import com.diegoparra.kino.R
 import com.diegoparra.kino.ui.MoviesFakes
 import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.ui.theme.KinoTheme
-import com.diegoparra.kino.ui.utils.*
+import com.diegoparra.kino.ui._components.*
 import kotlinx.coroutines.launch
 
 private val APP_BAR_HEIGHT = 250.dp

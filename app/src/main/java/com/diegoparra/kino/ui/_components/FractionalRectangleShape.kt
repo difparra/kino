@@ -1,4 +1,4 @@
-package com.diegoparra.kino.ui.utils
+package com.diegoparra.kino.ui._components
 
 import androidx.annotation.FloatRange
 import androidx.compose.ui.geometry.Rect

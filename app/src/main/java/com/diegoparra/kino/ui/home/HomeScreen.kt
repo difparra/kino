@@ -1,32 +1,26 @@
 package com.diegoparra.kino.ui.home
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.GenreWithMovies
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.ui.GenresFakes
 import com.diegoparra.kino.ui.theme.Dimens
-import com.diegoparra.kino.ui.utils.BasicErrorMessage
-import com.diegoparra.kino.ui.utils.BasicLoading
+import com.diegoparra.kino.ui._components.BasicErrorMessage
+import com.diegoparra.kino.ui._components.BasicLoading
 import com.diegoparra.kino.utils.Resource
-import com.diegoparra.kino.ui.utils.KinoImage
+import com.diegoparra.kino.ui._shared.MovieThumbnail
 
 @Composable
 fun HomeScreen(
@@ -103,25 +97,6 @@ fun GenreSection(
     }
 }
 
-@OptIn(ExperimentalCoilApi::class)
-@Composable
-fun MovieThumbnail(
-    movie: Movie,
-    onMovieClick: (movieId: String) -> Unit
-) {
-    Surface(
-        modifier = Modifier
-            .width((MOVIE_HEIGHT * 2) / 3)
-            .height(MOVIE_HEIGHT)
-            .clip(RoundedCornerShape(5.dp))
-            .clickable { onMovieClick(movie.id) }
-    ) {
-        KinoImage(
-            modifier = Modifier.fillMaxSize(),
-            imageUrl = movie.posterUrl
-        )
-    }
-}
 
 
 @Preview(showSystemUi = true)
@@ -131,6 +106,3 @@ fun GenreSectionsListPreview() {
     val genresAndMoviesResource = genresAndMovies.map { Resource.Success(it) }
     GenreSectionsList(genreAndMovies = genresAndMoviesResource, onMovieClick = {})
 }
-
-
-private val MOVIE_HEIGHT = 150.dp

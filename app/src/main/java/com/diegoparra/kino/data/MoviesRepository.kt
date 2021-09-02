@@ -11,10 +11,8 @@ interface MoviesRepository {
     suspend fun getMoviesByGenre(genreId: String): Either<Exception, List<Movie>>
     suspend fun getMovieById(id: String): Either<Exception, Movie>
 
-    suspend fun addFavourite(movieId: String)
-    suspend fun removeFavourites(movieId: String)
     suspend fun toggleFavourite(movieId: String)
     fun isFavourite(movieId: String): Flow<Either<Exception, Boolean>>
-    fun getFavourites(): Flow<Either<Exception, List<String>>>
+    fun getFavourites(): Flow<Either<Exception, List<Movie>>>
 
 }

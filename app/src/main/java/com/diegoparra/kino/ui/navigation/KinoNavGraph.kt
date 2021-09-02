@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import com.diegoparra.kino.ui.favourites.FavouritesScreen
+import com.diegoparra.kino.ui.favourites.FavouritesViewModel
 import com.diegoparra.kino.ui.home.HomeScreen
 import com.diegoparra.kino.ui.home.HomeViewModel
 import com.diegoparra.kino.ui.movie.MovieScreen
@@ -62,7 +64,11 @@ fun KinoNavGraph(
             Text(text = "Search screen")
         }
         composable(MainDestinations.FAVOURITES_ROUTE) {
-            Text(text = "Favourites Screen")
+            val favouritesViewModel: FavouritesViewModel = hiltViewModel()
+            FavouritesScreen(
+                viewModel = favouritesViewModel,
+                navigateToMovie = actions.navigateToMovie
+            )
         }
         composable(
             route = "${MainDestinations.MOVIE_ROUTE}/{$MOVIE_ID_KEY}",

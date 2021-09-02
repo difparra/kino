@@ -9,12 +9,14 @@ import com.diegoparra.kino.di.IoDispatcher
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.utils.Either
+import com.diegoparra.kino.utils.getFailuresOrRight
+import com.diegoparra.kino.utils.reduceFailuresOrRight
 import com.diegoparra.kino.utils.runCatching
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -37,27 +39,19 @@ class MoviesRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getMovieById(id: String): Either<Exception, Movie> = withContext(dispatcher) {
-        Either.runCatching {
-            moviesApi.getMovieById(id).toMovie()
+    override suspend fun getMovieById(id: String): Either<Exception, Movie> =
+        withContext(dispatcher) {
+            Either.runCatching {
+                moviesApi.getMovieById(id).toMovie()
+            }
         }
-    }
-
-
-    override suspend fun addFavourite(movieId: String) = withContext(dispatcher) {
-        favouritesDao.addFavourite(movieId)
-    }
-
-    override suspend fun removeFavourites(movieId: String) = withContext(dispatcher) {
-        favouritesDao.removeFavourite(movieId)
-    }
 
     override suspend fun toggleFavourite(movieId: String) = withContext(dispatcher) {
         favouritesDao.isFavouriteSingle(movieId).let { isFavourite ->
             if (isFavourite) {
-                removeFavourites(movieId)
+                favouritesDao.removeFavourite(movieId)
             } else {
-                addFavourite(movieId)
+                favouritesDao.addFavourite(movieId)
             }
         }
     }
@@ -68,10 +62,18 @@ class MoviesRepositoryImpl @Inject constructor(
             .flowOn(dispatcher)
     }
 
-    override fun getFavourites(): Flow<Either<Exception, List<String>>> {
-        return favouritesDao
-            .getFavourites()
-            .map { Either.runCatching { it } }
+    override fun getFavourites(): Flow<Either<Exception, List<Movie>>> {
+        return favouritesDao.getFavourites()
+            .map {
+                coroutineScope {
+                    val moviesAsyncList = it.map { movieId ->
+                        async { getMovieById(movieId) }
+                    }
+                    val movies = moviesAsyncList.awaitAll()
+                    movies.reduceFailuresOrRight()
+                }
+            }
             .flowOn(dispatcher)
     }
+
 }
