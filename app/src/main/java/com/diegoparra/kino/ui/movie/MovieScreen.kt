@@ -29,7 +29,6 @@ import com.diegoparra.kino.ui.MoviesFakes
 import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.ui.theme.KinoTheme
 import com.diegoparra.kino.ui._components.*
-import kotlinx.coroutines.launch
 
 private val APP_BAR_HEIGHT = 250.dp
 private val FAB_SIZE = 56.dp
@@ -173,6 +172,7 @@ private fun FavouriteButton(
     toggleFavourite: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
+    val snackbarController = remember { SnackbarController(scope, scaffoldState.snackbarHostState) }
     val addedMessage = stringResource(id = R.string.added_to_favourites)
     val removedMessage = stringResource(id = R.string.removed_from_favourites)
 
@@ -180,20 +180,12 @@ private fun FavouriteButton(
         modifier = modifier.size(FAB_SIZE),
         onClick = {
             toggleFavourite()
-            scope.launch {
-                //  Message will be the opposite as isFavourite.
-                //  This is because when isFavourite changes, it is not like the actual value in this
-                //  composable changes, the value will be changed in the new composable, but
-                //  in the meantime, this onClick will be executed in the previous composable,
-                //  the one with the favourite state before the change.
-                scaffoldState.snackbarHostState.showSnackbar(
-                    message = if(isFavourite) removedMessage else addedMessage
-                )
-                //  Another option may be to add the variable in the viewModel, and then calling
-                //  the snackbar to be shown when that state changes. However, the actual change
-                //  occur by this onClick, and coroutineScopes and showing snackbars should only
-                //  happen inside a click listener.
-            }
+            //  Message will be the opposite as isFavourite is the same for this composable.
+            //  The new is favourite will be in another composable, when this is call to recompose
+            //  as its arguments have changed.
+            snackbarController.showSnackbar(
+                message = if (isFavourite) removedMessage else addedMessage
+            )
         }
     ) {
         Icon(
