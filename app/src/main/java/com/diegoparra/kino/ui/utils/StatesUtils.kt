@@ -10,6 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import timber.log.Timber
 
+/**
+ * To be used instead of Modifier.align(--Alignment--)
+ * In other words, to be used when there is no Box as parent.
+ */
 @Composable
 fun AlignedInParent(
     modifier: Modifier = Modifier,

@@ -111,12 +111,15 @@ fun MovieThumbnail(
 ) {
     Surface(
         modifier = Modifier
-            .width(100.dp)
-            .height(150.dp)
+            .width((MOVIE_HEIGHT * 2) / 3)
+            .height(MOVIE_HEIGHT)
             .clip(RoundedCornerShape(5.dp))
             .clickable { onMovieClick(movie.id) }
     ) {
-        KinoImage(imageUrl = movie.posterUrl)
+        KinoImage(
+            modifier = Modifier.fillMaxSize(),
+            imageUrl = movie.posterUrl
+        )
     }
 }
 
@@ -128,3 +131,6 @@ fun GenreSectionsListPreview() {
     val genresAndMoviesResource = genresAndMovies.map { Resource.Success(it) }
     GenreSectionsList(genreAndMovies = genresAndMoviesResource, onMovieClick = {})
 }
+
+
+private val MOVIE_HEIGHT = 150.dp

@@ -5,6 +5,8 @@ import com.diegoparra.kino.data.MoviesRepository
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.GenreWithMovies
 import com.diegoparra.kino.utils.Event
+import com.diegoparra.kino.utils.fold
+import com.diegoparra.kino.utils.map
 import com.diegoparra.kino.utils.toResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -30,8 +32,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _loading.value = true
             moviesRepo.getGenres().fold(
-                onSuccess = { _genres.value = it },
-                onFailure = { _failure.value = Event(it) }
+                fnL = { _failure.value = Event(it) },
+                fnR = { _genres.value = it }
             )
             _loading.value = false
         }

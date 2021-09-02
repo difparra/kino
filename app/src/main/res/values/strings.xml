@@ -6,10 +6,9 @@
     <string name="menu_favs">Favourites</string>
 
     <string name="label_back">Back</string>
-    <string name="see_more">See more</string>
-    <string name="see_less">See less</string>
 
     <string name="overview">Overview</string>
 
-
+    <string name="added_to_favourites">Añadido a favoritos</string>
+    <string name="removed_from_favourites">Eliminado de favoritos</string>
 </resources>

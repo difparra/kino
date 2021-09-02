@@ -11,22 +11,9 @@ sealed class Resource<out T> {
         }
     }
 
-    class Error(val failure: Throwable) : Resource<Nothing>() {
+    class Error(val failure: Exception) : Resource<Nothing>() {
         override fun toString(): String {
             return "{ Resource.Failure / failure = $failure }"
         }
     }
 }
-
-
-fun <T> Result<T>.toResource() = this.fold(
-    onSuccess = { Resource.Success(it) },
-    onFailure = { Resource.Error(it) }
-)
-
-fun <T, R> Resource<T>.map(transform: (T) -> R): Resource<R> =
-    when (this) {
-        is Resource.Loading -> Resource.Loading
-        is Resource.Success -> Resource.Success(transform(this.data))
-        is Resource.Error -> Resource.Error(this.failure)
-    }

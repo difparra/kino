@@ -7,6 +7,8 @@ import com.diegoparra.kino.data.MoviesRepository
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.utils.Resource
+import com.diegoparra.kino.utils.fold
+import com.diegoparra.kino.utils.getOrElse
 import com.diegoparra.kino.utils.toResource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -44,8 +46,8 @@ class MovieViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             moviesRepo.getGenres().fold(
-                onSuccess = { _genres.value = it },
-                onFailure = { Timber.e("Failure loading genres in movie details\n$it\n${it.printStackTrace()}") }
+                fnL = { Timber.e("Failure loading genres in movie details\n$it\n${it.printStackTrace()}") },
+                fnR = { _genres.value = it }
             )
         }
     }
@@ -65,7 +67,7 @@ class MovieViewModel @Inject constructor(
 
     val isFavourite: Flow<Boolean> =
         moviesRepo.isFavourite(_movieId)
-            .map { it.getOrDefault(false) }
+            .map { it.getOrElse { false } }
 
     fun toggleFavourite() {
         viewModelScope.launch {

@@ -29,12 +29,15 @@ import com.diegoparra.kino.ui.MoviesFakes
 import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.ui.theme.KinoTheme
 import com.diegoparra.kino.ui.utils.*
+import kotlinx.coroutines.launch
 
 private val APP_BAR_HEIGHT = 250.dp
+private val FAB_SIZE = 56.dp
 
 @Composable
 fun MovieScreen(
     viewModel: MovieViewModel,
+    scaffoldState: ScaffoldState,
     navigateUp: () -> Unit
 ) {
     val movieResource by viewModel.movie.collectAsState(initial = Resource.Loading)
@@ -47,6 +50,7 @@ fun MovieScreen(
             movie = (movieResource as Resource.Success<Movie>).data,
             genreNames = genreNames,
             isFavourite = isFavourite,
+            scaffoldState = scaffoldState,
             toggleFavourite = viewModel::toggleFavourite,
             navigateUp = navigateUp
         )
@@ -59,47 +63,65 @@ fun MovieScreen(
     movie: Movie,
     genreNames: List<String>,
     isFavourite: Boolean,
+    scaffoldState: ScaffoldState,
     toggleFavourite: () -> Unit,
     navigateUp: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             val scrollState = rememberScrollState(0)
-            AppBar(backdropUrl = movie.backdropUrl, title = movie.title, navigateUp = navigateUp)
+            AppBar(
+                backdropUrl = movie.backdropUrl,
+                title = movie.title,
+                navigateUp = navigateUp
+            )
             Body(movie = movie, genreNames = genreNames, scroll = scrollState)
         }
         Box(
             modifier = Modifier
-                .height(APP_BAR_HEIGHT)
-                .fillMaxWidth(),
-            contentAlignment = Alignment.BottomEnd
+                .fillMaxWidth()
+                .offset(x = 0.dp, y = APP_BAR_HEIGHT - (FAB_SIZE / 2))
+                .padding(horizontal = Dimens.big, vertical = 0.dp),
+            contentAlignment = Alignment.CenterEnd
         ) {
-            FavouriteButton(isFavourite = isFavourite, onClick = toggleFavourite)
+            FavouriteButton(
+                scaffoldState = scaffoldState,
+                isFavourite = isFavourite,
+                toggleFavourite = toggleFavourite
+            )
         }
     }
 }
 
 @Composable
-private fun AppBar(backdropUrl: String, title: String, navigateUp: () -> Unit) {
+private fun AppBar(
+    modifier: Modifier = Modifier,
+    backdropUrl: String,
+    title: String,
+    navigateUp: () -> Unit
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(APP_BAR_HEIGHT)
     ) {
         ImageCard(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.matchParentSize(),
             imageUrl = backdropUrl,
             title = title
         )
-        NavigateUpButton(upPress = navigateUp)
+        NavigateUpButton(
+            modifier = Modifier.align(Alignment.TopStart),
+            upPress = navigateUp
+        )
     }
 }
 
 @Composable
-private fun NavigateUpButton(upPress: () -> Unit) {
+private fun NavigateUpButton(modifier: Modifier = Modifier, upPress: () -> Unit) {
     IconButton(
         onClick = upPress,
-        modifier = Modifier
+        modifier = modifier
             .padding(Dimens.standard)
             .size(36.dp)
             .background(color = ColorControl.copy(alpha = 0.25f), shape = CircleShape)
@@ -117,13 +139,14 @@ private fun NavigateUpButton(upPress: () -> Unit) {
 private fun ImageCard(modifier: Modifier = Modifier, imageUrl: String, title: String) {
     Box(modifier = modifier) {
         KinoImage(
+            modifier = Modifier.matchParentSize(),
             imageUrl = imageUrl,
             contentScale = ContentScale.Crop,
             contentDescription = title
         )
         Box(
             modifier = Modifier
-                .fillMaxSize()
+                .matchParentSize()
                 .background(
                     brush = Brush.verticalGradient(
                         0.7f to Color.Transparent,
@@ -131,24 +154,50 @@ private fun ImageCard(modifier: Modifier = Modifier, imageUrl: String, title: St
                     )
                 )
         )
-        AlignedInParent(
-            alignment = Alignment.BottomStart,
-            modifier = Modifier.padding(Dimens.big)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h5,
-                color = Color.White
-            )
-        }
+        Text(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(Dimens.big),
+            text = title,
+            style = MaterialTheme.typography.h5,
+            color = Color.White
+        )
     }
 }
 
 @Composable
-private fun FavouriteButton(isFavourite: Boolean, onClick: () -> Unit) {
-    FloatingActionButton(onClick = onClick) {
+private fun FavouriteButton(
+    scaffoldState: ScaffoldState,
+    modifier: Modifier = Modifier,
+    isFavourite: Boolean,
+    toggleFavourite: () -> Unit
+) {
+    val scope = rememberCoroutineScope()
+    val addedMessage = stringResource(id = R.string.added_to_favourites)
+    val removedMessage = stringResource(id = R.string.removed_from_favourites)
+
+    FloatingActionButton(
+        modifier = modifier.size(FAB_SIZE),
+        onClick = {
+            toggleFavourite()
+            scope.launch {
+                //  Message will be the opposite as isFavourite.
+                //  This is because when isFavourite changes, it is not like the actual value in this
+                //  composable changes, the value will be changed in the new composable, but
+                //  in the meantime, this onClick will be executed in the previous composable,
+                //  the one with the favourite state before the change.
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = if(isFavourite) removedMessage else addedMessage
+                )
+                //  Another option may be to add the variable in the viewModel, and then calling
+                //  the snackbar to be shown when that state changes. However, the actual change
+                //  occur by this onClick, and coroutineScopes and showing snackbars should only
+                //  happen inside a click listener.
+            }
+        }
+    ) {
         Icon(
-            imageVector = if(isFavourite) Icons.Default.Star else Icons.Default.StarOutline,
+            imageVector = if (isFavourite) Icons.Default.Star else Icons.Default.StarOutline,
             contentDescription = stringResource(id = R.string.menu_favs)
         )
     }
@@ -227,6 +276,7 @@ fun MovieScreenPreview() {
             movie = MoviesFakes.SuicideSquad,
             genreNames = listOf("Action", "Adventure", "Comedy"),
             isFavourite = false,
+            scaffoldState = rememberScaffoldState(),
             toggleFavourite = {},
             navigateUp = {})
     }

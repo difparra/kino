@@ -8,6 +8,8 @@ import com.diegoparra.kino.data.network.MoviesApi
 import com.diegoparra.kino.di.IoDispatcher
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.Movie
+import com.diegoparra.kino.utils.Either
+import com.diegoparra.kino.utils.runCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -22,21 +24,21 @@ class MoviesRepositoryImpl @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : MoviesRepository {
 
-    override suspend fun getGenres(): Result<List<Genre>> = withContext(dispatcher) {
-        kotlin.runCatching {
+    override suspend fun getGenres(): Either<Exception, List<Genre>> = withContext(dispatcher) {
+        Either.runCatching {
             moviesApi.getGenres().toGenreList()
         }
     }
 
-    override suspend fun getMoviesByGenre(genreId: String): Result<List<Movie>> =
+    override suspend fun getMoviesByGenre(genreId: String): Either<Exception, List<Movie>> =
         withContext(dispatcher) {
-            kotlin.runCatching {
+            Either.runCatching {
                 moviesApi.getMoviesByGenre(genreId).toMoviesList()
             }
         }
 
-    override suspend fun getMovieById(id: String): Result<Movie> = withContext(dispatcher) {
-        kotlin.runCatching {
+    override suspend fun getMovieById(id: String): Either<Exception, Movie> = withContext(dispatcher) {
+        Either.runCatching {
             moviesApi.getMovieById(id).toMovie()
         }
     }
@@ -60,16 +62,16 @@ class MoviesRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun isFavourite(movieId: String): Flow<Result<Boolean>> {
+    override fun isFavourite(movieId: String): Flow<Either<Exception, Boolean>> {
         return favouritesDao.isFavourite(movieId)
-            .map { kotlin.runCatching { it } }
+            .map { Either.runCatching { it } }
             .flowOn(dispatcher)
     }
 
-    override fun getFavourites(): Flow<Result<List<String>>> {
+    override fun getFavourites(): Flow<Either<Exception, List<String>>> {
         return favouritesDao
             .getFavourites()
-            .map { kotlin.runCatching { it } }
+            .map { Either.runCatching { it } }
             .flowOn(dispatcher)
     }
 }

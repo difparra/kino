@@ -13,10 +13,16 @@ import com.diegoparra.kino.ui.theme.KinoTheme
 fun KinoApp() {
     KinoTheme {
         val navController = rememberNavController()
+        val scaffoldState = rememberScaffoldState()
         Scaffold(
+            scaffoldState = scaffoldState,
             bottomBar = { KinoBottomNavBar(navController = navController) }
         ) { innerPaddingModifier ->
-            KinoNavGraph(navController = navController, modifier = Modifier.padding(innerPaddingModifier))
+            KinoNavGraph(
+                navController = navController,
+                scaffoldState = scaffoldState,
+                modifier = Modifier.padding(innerPaddingModifier)
+            )
         }
 
     }

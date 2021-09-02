@@ -1,5 +1,6 @@
 package com.diegoparra.kino.ui.navigation
 
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -37,6 +38,7 @@ class MainActions(navController: NavHostController) {
 @Composable
 fun KinoNavGraph(
     modifier: Modifier = Modifier,
+    scaffoldState: ScaffoldState,
     navController: NavHostController = rememberNavController(),
     startDestination: String = MainDestinations.HOME_ROUTE
 ) {
@@ -69,6 +71,7 @@ fun KinoNavGraph(
             val movieViewModel: MovieViewModel = hiltViewModel()
             MovieScreen(
                 viewModel = movieViewModel,
+                scaffoldState = scaffoldState,
                 navigateUp = actions.upPress
             )
         }
