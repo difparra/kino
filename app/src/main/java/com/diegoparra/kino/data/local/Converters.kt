@@ -1,20 +1,18 @@
 package com.diegoparra.kino.data.local
 
 import androidx.room.TypeConverter
-import com.diegoparra.kino.utils.toEpochMilliUTC
-import com.diegoparra.kino.utils.toLocalDateTime
-import java.time.LocalDateTime
+import java.time.Instant
 
 class Converters {
 
     @TypeConverter
-    fun toLocalDateTime(epochSecond: Long): LocalDateTime {
-        return epochSecond.toLocalDateTime()
+    fun toInstant(epochMilli: Long): Instant {
+        return Instant.ofEpochMilli(epochMilli)
     }
 
     @TypeConverter
-    fun fromLocalDateTime(dateTime: LocalDateTime): Long {
-        return dateTime.toEpochMilliUTC()
+    fun fromInstant(instant: Instant): Long {
+        return instant.toEpochMilli()
     }
 
 }

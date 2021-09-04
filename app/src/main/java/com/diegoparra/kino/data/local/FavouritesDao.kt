@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
-import java.time.LocalDateTime
+import java.time.Instant
 
 @Dao
 abstract class FavouritesDao {
@@ -18,7 +18,7 @@ abstract class FavouritesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract suspend fun _addFavourite(favourite: Favourite)
     suspend fun addFavourite(movieId: String) {
-        _addFavourite(Favourite(movieId = movieId, updatedAt = LocalDateTime.now()))
+        _addFavourite(Favourite(movieId = movieId, updatedAt = Instant.now()))
     }
 
     @Query("DELETE FROM Favourite WHERE movieId = :movieId")

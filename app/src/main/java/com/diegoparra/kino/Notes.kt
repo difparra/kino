@@ -19,4 +19,33 @@ NOTES:
             the viewModel / ui, rather than just getting info about a generic Exception.
             - Either is also different from Result in its name. So that it is easier to import
             this class, and don't get confused with the Result from kotlin.
+
+
+  - LocalDateTime has neither offset nor zone defined.
+    It can compare values, but they are independent form regions and offset.
+    When called LocalDateTime, it basically gives the dateTime in the device, but without knowing
+    the actual offset.
+
+    DATE TIME NOTES: https://stackoverflow.com/questions/41427384/how-to-get-default-zoneoffset-in-java8
+
+                                    LEGACY CLASS                    MODERN CLASS
+    ------------------------------------------------------------------------------------------------
+    Moment in UTC                   java.util.Date                  java.time.Instant
+                                    java.sql.Timestamp
+    ------------------------------------------------------------------------------------------------
+    Moment with offset-from-UTC     (lacking)                       java.time.OffsetDateTime
+    (hours - minutes - seconds)
+    ------------------------------------------------------------------------------------------------
+    Moment with time zone           java.util.GregorianCalendar     java.time.ZonedDateTime
+    (continent/region)
+    ------------------------------------------------------------------------------------------------
+    Date & Time-of-day              (lacking)                       java.time.LocalDateTime
+    (no offset - no zone)
+    Not a moment
+
+    Changed LocalDateTime to Instant when saving values in database just to compare if value is updated or not.
+    Instant is based in UTC time. Having a unique reference makes it easier to compare values.
+    In addition, Long can be used instead of instant, as they are basically the same, but, having instant is more readable, and is less likely to make some mistake about giving a seconds or milliseconds value.
+
+    Using LocalDateTime, as it can't be directly saved in database, and when parsing I have to take care of timeZones is more prone to errors.
  */
