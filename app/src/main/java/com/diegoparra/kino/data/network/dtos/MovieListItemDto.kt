@@ -2,14 +2,7 @@ package com.diegoparra.kino.data.network.dtos
 
 import com.google.gson.annotations.SerializedName
 
-data class MoviesByGenreResponse(
-    val page: Int,
-    val results: List<MovieListDto>,
-    @SerializedName("total_pages") val totalPages: Int?,
-    @SerializedName("total_results") val totalResults: Int?
-)
-
-data class MovieListDto(
+data class MovieListItemDto(
     val id: String,
     val adult: Boolean?,
     @SerializedName("genre_ids") val genreIds: List<String>?,

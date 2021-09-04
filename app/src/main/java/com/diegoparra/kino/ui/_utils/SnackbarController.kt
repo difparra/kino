@@ -1,4 +1,4 @@
-package com.diegoparra.kino.ui._components
+package com.diegoparra.kino.ui._utils
 
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHostState

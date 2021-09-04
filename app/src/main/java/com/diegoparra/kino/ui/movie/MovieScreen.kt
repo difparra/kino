@@ -26,9 +26,10 @@ import com.diegoparra.kino.ui.theme.Dimens
 import com.diegoparra.kino.utils.Resource
 import com.diegoparra.kino.R
 import com.diegoparra.kino.ui.MoviesFakes
+import com.diegoparra.kino.ui._components.SimpleRatingBar
 import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.ui.theme.KinoTheme
-import com.diegoparra.kino.ui._components.*
+import com.diegoparra.kino.ui._utils.*
 
 private val APP_BAR_HEIGHT = 250.dp
 private val FAB_SIZE = 56.dp

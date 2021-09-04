@@ -45,10 +45,10 @@ inline fun <L, R> Either<L, R>.getOrElse(onFailure: (failure: L) -> R): R =
         is Either.Right -> b
     }
 
-inline fun <L,R,T> Either<L,R>.fold(fnL: (L) -> T, fnR: (R) -> T): T =
+inline fun <L,R,T> Either<L,R>.fold(onSuccess: (R) -> T, onFailure: (L) -> T): T =
     when (this) {
-        is Either.Left -> fnL(a)
-        is Either.Right -> fnR(b)
+        is Either.Left -> onFailure(a)
+        is Either.Right -> onSuccess(b)
     }
 
 

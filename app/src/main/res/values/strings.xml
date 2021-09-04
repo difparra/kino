@@ -1,14 +1,20 @@
 <resources>
     <string name="app_name">Kino</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_search">Search</string>
-    <string name="menu_favs">Favourites</string>
+    <string name="menu_home">Inicio</string>
+    <string name="menu_search">Buscar</string>
+    <string name="menu_favs">Favoritos</string>
 
-    <string name="label_back">Back</string>
+    <string name="label_back">Atrás</string>
 
-    <string name="overview">Overview</string>
-
+    <!-- Movie details -->
+    <string name="overview">Resumen</string>
     <string name="added_to_favourites">Añadido a favoritos</string>
     <string name="removed_from_favourites">Eliminado de favoritos</string>
+
+    <!-- Search -->
+    <string name="label_search">Buscar</string>
+    <string name="empty_query">El campo buscar está vacío. Ingresa algo para comenzar una búsqueda.</string>
+    <string name="search_no_results">No se encontraron resultados. Intenta con otra palabra.</string>
+
 </resources>

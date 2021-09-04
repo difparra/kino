@@ -46,8 +46,8 @@ class MovieViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             moviesRepo.getGenres().fold(
-                fnL = { Timber.e("Failure loading genres in movie details\n$it\n${it.printStackTrace()}") },
-                fnR = { _genres.value = it }
+                onSuccess = { _genres.value = it },
+                onFailure = { Timber.e("Failure loading genres in movie details\n$it\n${it.printStackTrace()}") }
             )
         }
     }

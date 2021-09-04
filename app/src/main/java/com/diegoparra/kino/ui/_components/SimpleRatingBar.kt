@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import com.diegoparra.kino.ui._utils.FractionalRectangleShape
 import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.utils.roundToMultiple
 

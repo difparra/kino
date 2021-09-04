@@ -17,10 +17,10 @@ import com.diegoparra.kino.models.GenreWithMovies
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.ui.GenresFakes
 import com.diegoparra.kino.ui.theme.Dimens
-import com.diegoparra.kino.ui._components.BasicErrorMessage
-import com.diegoparra.kino.ui._components.BasicLoading
+import com.diegoparra.kino.ui._utils.BasicErrorMessage
+import com.diegoparra.kino.ui._utils.BasicLoading
 import com.diegoparra.kino.utils.Resource
-import com.diegoparra.kino.ui._shared.MovieThumbnail
+import com.diegoparra.kino.ui._components.MovieThumbnail
 
 @Composable
 fun HomeScreen(

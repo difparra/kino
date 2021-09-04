@@ -3,11 +3,15 @@ package com.diegoparra.kino.data
 import com.diegoparra.kino.data.local.FavouritesDao
 import com.diegoparra.kino.data.network.DtoTransformations.toGenreList
 import com.diegoparra.kino.data.network.DtoTransformations.toMovie
+import com.diegoparra.kino.data.network.DtoTransformations.toMovieCredits
 import com.diegoparra.kino.data.network.DtoTransformations.toMoviesList
+import com.diegoparra.kino.data.network.DtoTransformations.toPeopleList
 import com.diegoparra.kino.data.network.MoviesApi
 import com.diegoparra.kino.di.IoDispatcher
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.Movie
+import com.diegoparra.kino.models.MovieCredits
+import com.diegoparra.kino.models.People
 import com.diegoparra.kino.utils.Either
 import com.diegoparra.kino.utils.getFailuresOrRight
 import com.diegoparra.kino.utils.reduceFailuresOrRight
@@ -76,4 +80,29 @@ class MoviesRepositoryImpl @Inject constructor(
             .flowOn(dispatcher)
     }
 
+
+    override suspend fun getCredits(movieId: String): Either<Exception, MovieCredits> =
+        withContext(dispatcher) {
+            Either.runCatching { moviesApi.getCredits(movieId).toMovieCredits() }
+        }
+
+    override suspend fun getSuggestions(movieId: String): Either<Exception, List<Movie>> =
+        withContext(dispatcher) {
+            Either.runCatching { moviesApi.getSuggestions(movieId).toMoviesList() }
+        }
+
+    override suspend fun searchMovieByName(title: String): Either<Exception, List<Movie>> =
+        withContext(dispatcher) {
+            Either.runCatching { moviesApi.searchMovieByName(title).toMoviesList() }
+        }
+
+    override suspend fun searchPeopleByName(name: String): Either<Exception, List<People>> =
+        withContext(dispatcher) {
+            Either.runCatching { moviesApi.searchPeopleByName(name).toPeopleList() }
+        }
+
+    override suspend fun searchMovieByActorId(actorId: String): Either<Exception, List<Movie>> =
+        withContext(dispatcher) {
+            Either.runCatching { moviesApi.searchMovieByActorId(actorId).toMoviesList() }
+        }
 }

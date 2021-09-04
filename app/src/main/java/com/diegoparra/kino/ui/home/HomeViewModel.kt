@@ -32,8 +32,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _loading.value = true
             moviesRepo.getGenres().fold(
-                fnL = { _failure.value = Event(it) },
-                fnR = { _genres.value = it }
+                onSuccess = { _genres.value = it },
+                onFailure = { _failure.value = Event(it) }
             )
             _loading.value = false
         }

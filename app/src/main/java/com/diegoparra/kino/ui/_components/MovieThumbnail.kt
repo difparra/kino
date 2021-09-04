@@ -1,4 +1,4 @@
-package com.diegoparra.kino.ui._shared
+package com.diegoparra.kino.ui._components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.ui.MoviesFakes
-import com.diegoparra.kino.ui._components.KinoImage
+import com.diegoparra.kino.ui._utils.KinoImage
 import com.diegoparra.kino.ui.theme.KinoTheme
 
 private val MOVIE_HEIGHT = 150.dp

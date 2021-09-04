@@ -1,13 +1,16 @@
-package com.diegoparra.kino.ui._components
+package com.diegoparra.kino.ui._utils
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import com.diegoparra.kino.ui.theme.Dimens
 import timber.log.Timber
 
 /**
@@ -44,6 +47,10 @@ fun BasicErrorMessage(throwable: Throwable) {
 @Composable
 fun BasicErrorMessage(errorMessage: String) {
     AlignedInParent(alignment = Alignment.Center) {
-        Text(text = errorMessage)
+        Text(
+            text = errorMessage,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(Dimens.big * 2)
+        )
     }
 }

@@ -1,7 +1,6 @@
 package com.diegoparra.kino.ui.navigation
 
 import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -19,6 +18,8 @@ import com.diegoparra.kino.ui.home.HomeViewModel
 import com.diegoparra.kino.ui.movie.MovieScreen
 import com.diegoparra.kino.ui.movie.MovieViewModel
 import com.diegoparra.kino.ui.movie.MovieViewModel.Companion.MOVIE_ID_KEY
+import com.diegoparra.kino.ui.search.SearchScreen
+import com.diegoparra.kino.ui.search.SearchViewModel
 
 object MainDestinations {
     const val HOME_ROUTE = "home"
@@ -46,6 +47,7 @@ fun KinoNavGraph(
 ) {
 
     val actions = remember(navController) { MainActions(navController) }
+    val navigateToMovie = remember(actions) { actions.navigateToMovie }
 
     NavHost(
         navController = navController,
@@ -57,17 +59,21 @@ fun KinoNavGraph(
             val homeViewModel: HomeViewModel = hiltViewModel()
             HomeScreen(
                 viewModel = homeViewModel,
-                navigateToMovie = actions.navigateToMovie
+                navigateToMovie = navigateToMovie
             )
         }
         composable(MainDestinations.SEARCH_ROUTE) {
-            Text(text = "Search screen")
+            val searchViewModel: SearchViewModel = hiltViewModel()
+            SearchScreen(
+                viewModel = searchViewModel,
+                navigateToMovie = navigateToMovie
+            )
         }
         composable(MainDestinations.FAVOURITES_ROUTE) {
             val favouritesViewModel: FavouritesViewModel = hiltViewModel()
             FavouritesScreen(
                 viewModel = favouritesViewModel,
-                navigateToMovie = actions.navigateToMovie
+                navigateToMovie = navigateToMovie
             )
         }
         composable(
