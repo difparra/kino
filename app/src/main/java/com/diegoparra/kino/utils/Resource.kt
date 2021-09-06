@@ -5,15 +5,14 @@ package com.diegoparra.kino.utils
  */
 sealed class Resource<out T> {
     object Loading : Resource<Nothing>()
-    class Success<T>(val data: T) : Resource<T>() {
-        override fun toString(): String {
-            return "{ Resource.Success / data = $data }"
-        }
-    }
+    class Success<T>(val data: T) : Resource<T>()
+    class Error(val failure: Exception) : Resource<Nothing>()
 
-    class Error(val failure: Exception) : Resource<Nothing>() {
-        override fun toString(): String {
-            return "{ Resource.Failure / failure = $failure }"
+    override fun toString(): String {
+        return when(this) {
+            Loading -> "Loading"
+            is Success -> "Success[data=${this.data}]"
+            is Error -> "Error[exception=${this.failure}]"
         }
     }
 }

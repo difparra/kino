@@ -13,15 +13,12 @@ import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.models.MovieCredits
 import com.diegoparra.kino.models.People
 import com.diegoparra.kino.utils.Either
-import com.diegoparra.kino.utils.getFailuresOrRight
 import com.diegoparra.kino.utils.reduceFailuresOrRight
 import com.diegoparra.kino.utils.runCatching
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 import javax.inject.Inject
 
 class MoviesRepositoryImpl @Inject constructor(

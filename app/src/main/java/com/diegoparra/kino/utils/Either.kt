@@ -105,7 +105,7 @@ inline fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T>
  * Transform a List of Either<> into a Either<_,List>. (Left-Biased)
  * The returned value will be:
  *  - Failure:  If any of the elements in the list is Failure (Left)
- *  - Success:  If every item in the list is Success (Right)
+ *  - Success:  If every item in the list is Success (Right) or original list is empty
  */
 fun <L, R> List<Either<L, R>>.getFailuresOrRight(): Either<List<L>, List<R>> {
     val failures = this.filterIsInstance<Either.Left<L>>().map { it.a }
