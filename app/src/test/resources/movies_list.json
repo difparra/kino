@@ -1,0 +1,410 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
+      "genre_ids": [
+        28,
+        12,
+        14,
+        35
+      ],
+      "id": 436969,
+      "original_language": "en",
+      "original_title": "The Suicide Squad",
+      "overview": "Un grupo de super villanos se encuentran encerrados en Belle Reve, una prisión de alta seguridad con la tasa de mortalidad más alta de Estados Unidos. Para salir de allí harán cualquier cosa, incluso unirse al grupo Task Force X, dedicado a llevar a cabo misiones suicidas bajo las órdenes de Amanda Waller. Fuertemente armados son enviados a la isla Corto Maltese, una jungla repleta de enemigos.",
+      "popularity": 4013.503,
+      "poster_path": "/fPJWlhXA2VXf4MlQ3JenVsz1iba.jpg",
+      "release_date": "2021-07-28",
+      "title": "El Escuadrón Suicida",
+      "video": false,
+      "vote_average": 8,
+      "vote_count": 2969
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/7WJjFviFBffEJvkAms4uWwbcVUk.jpg",
+      "genre_ids": [
+        12,
+        14,
+        35,
+        28
+      ],
+      "id": 451048,
+      "original_language": "en",
+      "original_title": "Jungle Cruise",
+      "overview": "Principios del siglo XX. Frank (Dwayne Johnson) es el carismático capitán de una peculiar embarcación que recorre la selva amazónica. Allí, a pesar de los peligros que el río Amazonas les tiene preparados, Frank llevará en su barco a la científica Lily Houghton (Emily Blunt) y a su hermano McGregor Houghton (Jack Whitehall). Su misión será encontrar un árbol místico que podría tener poderes curativos. Claro que su objetivo no será fácil, y en su aventura se encontrarán con toda clase de dificultades, además de una expedición alemana que busca también este árbol con propiedades curativas. Esta comedia de acción y aventuras está basada en la atracción Jungle Cruise de los parques de ocio de Disney.",
+      "popularity": 3406.403,
+      "poster_path": "/esgrxpxrQufea2A3iHJUquG4mdz.jpg",
+      "release_date": "2021-07-28",
+      "title": "Jungle Cruise",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 2063
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/AjQgFtfXTmmMVuaH2VfQDdGbeQH.jpg",
+      "genre_ids": [
+        28,
+        18,
+        80
+      ],
+      "id": 706972,
+      "original_language": "en",
+      "original_title": "Narco Sub",
+      "overview": "Un hombre se convertirá en un criminal para salvar a su familia. Director: Shawn Welling Guionista: Derek H. Potts Estrellas: Tom Vera, Tom Sizemore, Lee Majors |",
+      "popularity": 2281.463,
+      "poster_path": "/7p0O4mKYLIhU2E5Zcq9Z3vOZ4e9.jpg",
+      "release_date": "2021-07-22",
+      "title": "Operación Narco",
+      "video": false,
+      "vote_average": 3.2,
+      "vote_count": 10
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/dq18nCTTLpy9PmtzZI6Y2yAgdw5.jpg",
+      "genre_ids": [
+        28,
+        12,
+        53,
+        878
+      ],
+      "id": 497698,
+      "original_language": "en",
+      "original_title": "Black Widow",
+      "overview": "Natasha Romanoff, alias Viuda Negra, se enfrenta a las partes más oscuras de su historia cuando surge una peligrosa conspiración con vínculos con su pasado. Perseguida por una fuerza que no se detendrá ante nada para acabar con ella, Natasha debe enfrentarse a su historia como espía y a las relaciones rotas que dejó a su paso mucho antes de convertirse en una Vengadora.",
+      "popularity": 1917.443,
+      "poster_path": "/oggEsESyLjVGD7jbIdBfa2hFUrx.jpg",
+      "release_date": "2021-07-07",
+      "title": "Viuda negra",
+      "video": false,
+      "vote_average": 7.8,
+      "vote_count": 4481
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/lzLzKXq2C0kL5Pu7VW5sNl5KV6L.jpg",
+      "genre_ids": [
+        12,
+        53,
+        18,
+        28
+      ],
+      "id": 597433,
+      "original_language": "en",
+      "original_title": "Beckett",
+      "overview": "Beckett (John David Washington), un estadounidense de vacaciones en Grecia, se convierte en víctima de una persecución tras un brutal accidente. Mientras emprende una huida desesperada por Grecia para salvar el pellejo, llegar a la embajada de Estados Unidos y lavar su nombre, la tensión va en aumento a medida que las autoridades estrechan el cerco, el malestar político aumenta, y Beckett se va adentrando más y más en una peligrosa e intrincada conspiración.",
+      "popularity": 1715.514,
+      "poster_path": "/fBJducGBcmrcIOQdhm4BUBNDiMu.jpg",
+      "release_date": "2021-08-04",
+      "title": "Beckett",
+      "video": false,
+      "vote_average": 6.2,
+      "vote_count": 204
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/j28p5VwI5ieZnNwfeuZ5Ve3mPsn.jpg",
+      "genre_ids": [
+        35,
+        28,
+        12,
+        878
+      ],
+      "id": 550988,
+      "original_language": "en",
+      "original_title": "Free Guy",
+      "overview": "Un hombre descubre que en realidad es un personaje dentro de un videojuego. Guy (Ryan Reynolds) trabaja como cajero de un banco, es un tipo alegre y solitario al que nada la amarga el día. Incluso si le utilizan como rehén durante un atraco a su banco, él sigue sonriendo como si nada. Pero un día se da cuenta de que Free City no es exactamente la ciudad que él creía. Guy va a descubrir que en realidad es un personaje no jugable dentro de un brutal videojuego. Ahora que sabe que es un personaje de videojuego, Guy, acompañado por Molotov Girl (Jodie Comer), decidirá enfrentarse a todos los villanos que asolan la ciudad.",
+      "popularity": 1700.206,
+      "poster_path": "/suaooqn1Mnv60V19MoGxneMupJs.jpg",
+      "release_date": "2021-08-11",
+      "title": "Free Guy",
+      "video": false,
+      "vote_average": 7.8,
+      "vote_count": 392
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/xXHZeb1yhJvnSHPzZDqee0zfMb6.jpg",
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "id": 385128,
+      "original_language": "en",
+      "original_title": "F9",
+      "overview": "Dom Toretto lleva una vida tranquila con Letty y su hijo, el pequeño Brian, pero saben que el peligro siempre acecha. Esta vez, esa amenaza obligará a Dom a enfrentarse a los pecados de su pasado si quiere salvar a quienes más quiere. El equipo se vuelve a reunir para impedir un complot a escala mundial, liderado por uno de los asesinos más peligrosos y mejor conductor a los que se han enfrentado; un hombre que además es el hermano desaparecido de Dom, Jakob. Novena entrega de la famosa franquicia.",
+      "popularity": 1610.64,
+      "poster_path": "/TX1T3c3CDBN0y8iDNvlQbtiA5Z.jpg",
+      "release_date": "2021-05-19",
+      "title": "Fast & Furious 9",
+      "video": false,
+      "vote_average": 7.6,
+      "vote_count": 3098
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/wjQXZTlFM3PVEUmKf1sUajjygqT.jpg",
+      "genre_ids": [
+        878,
+        28,
+        53
+      ],
+      "id": 581726,
+      "original_language": "en",
+      "original_title": "Infinite",
+      "overview": "Evan McCauley tiene habilidades que nunca aprendió y recuerdos de lugares que nunca ha visitado. Automedicado y al borde de un colapso mental, un grupo secreto que se hace llamar \"Infinitos\" acuden a su rescate, revelando que sus recuerdos son reales.",
+      "popularity": 1493.933,
+      "poster_path": "/niw2AKHz6XmwiRMLWaoyAOAti0G.jpg",
+      "release_date": "2021-06-10",
+      "title": "Infinito",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 826
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/yizL4cEKsVvl17Wc1mGEIrQtM2F.jpg",
+      "genre_ids": [
+        28,
+        878,
+        12
+      ],
+      "id": 588228,
+      "original_language": "en",
+      "original_title": "The Tomorrow War",
+      "overview": "Un día el mundo se paraliza cuando un grupo de viajeros en el tiempo se transporta desde el año 2051 para entregar un mensaje urgente: La humanidad está perdiendo la guerra mundial contra una especie alienígena letal. La única esperanza de supervivencia es que los soldados y los ciudadanos del presente sean transportados al futuro y se unan a la lucha. Entre los reclutados está el profesor de instituto y padre de familia Dan Forester (Chris Pratt) quien, decidido a salvar el mundo por su hija, se une a una brillante científica (Yvonne Strahovski) y a su padre (J.K. Simmons) en una búsqueda desesperada por reescribir el destino del planeta.",
+      "popularity": 1461.785,
+      "poster_path": "/tzp6VzED2TBc02bkYoYnQa6r2OK.jpg",
+      "release_date": "2021-06-30",
+      "title": "La guerra del mañana",
+      "video": false,
+      "vote_average": 8.2,
+      "vote_count": 3618
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/rUoGZuscSG4fQP3I56ndadu2A8E.jpg",
+      "genre_ids": [
+        28,
+        35
+      ],
+      "id": 729720,
+      "original_language": "fr",
+      "original_title": "Le Dernier Mercenaire",
+      "overview": "Un misterioso ex agente del servicio secreto debe regresar urgentemente a Francia cuando su hijo separado es acusado falsamente por el gobierno de tráfico de armas y drogas, luego de un error cometido por un burócrata demasiado entusiasta y una operación de la mafia.",
+      "popularity": 1319.109,
+      "poster_path": "/mXmY5F0212bMg5ZbAlVTB3cWBQi.jpg",
+      "release_date": "2021-07-30",
+      "title": "El último mercenario",
+      "video": false,
+      "vote_average": 6.9,
+      "vote_count": 291
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/6tPOZmNQ1tbzlhcMmyhYN1a1dEh.jpg",
+      "genre_ids": [
+        28,
+        53
+      ],
+      "id": 809968,
+      "original_language": "pl",
+      "original_title": "Bartkowiak",
+      "overview": "Tras el fallecimiento de su hermano en un accidente de coche, un joven luchador se hace cargo del club familiar y pronto se da cuenta de que esa muerte no fue accidental.",
+      "popularity": 1026.446,
+      "poster_path": "/kOVko9u2CSwpU8zGj14Pzei6Eco.jpg",
+      "release_date": "2021-07-28",
+      "title": "Bartkowiak",
+      "video": false,
+      "vote_average": 5.9,
+      "vote_count": 85
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/wPjtacig0kIkVcTQmXoNt6jbMwo.jpg",
+      "genre_ids": [
+        28,
+        35
+      ],
+      "id": 617502,
+      "original_language": "en",
+      "original_title": "Jolt",
+      "overview": "Una chica dura con tendencias ligeramente homicidas y que no controla la ira se da descargas con un chaleco de electrodos para volver a la normalidad si le entran las ganas de matar. Cuando asesinan al primer hombre del que se ha enamorado, empieza un desenfreno vengativo para encontrar al asesino, al mismo tiempo que la policía va tras ella porque la considera sospechosa.",
+      "popularity": 1009.379,
+      "poster_path": "/gYZAHan5CHPFXORpQMvOjCTug4E.jpg",
+      "release_date": "2021-07-15",
+      "title": "Jolt",
+      "video": false,
+      "vote_average": 6.8,
+      "vote_count": 556
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/tehpKMsls621GT9WUQie2Ft6LmP.jpg",
+      "genre_ids": [
+        27,
+        28,
+        53
+      ],
+      "id": 602223,
+      "original_language": "en",
+      "original_title": "The Forever Purge",
+      "overview": "Para los miembros de un movimiento clandestino, ya no es suficiente una noche anual de anarquía y asesinatos, así que deciden devolver a Estados Unidos el caos y las masacres sin fin, donde nadie volverá a estar a salvo... jamás. Adela y su esposo Juan viven en Texas, donde él trabaja como peón en un rancho para la adinerada familia Tucker. En la mañana después de la tradicional purga, una banda de asesinos enmascarados ataca violenta e ilegalmente a la familia Tucker. Tras este hecho, la familia texana se ve obligada a unirse con Juan y su esposa para enfrentar un país entero a punto de colapsar, que se hunde en un mar de caos y de sangre. Quinta y última entrega de la saga 'The Purge'.",
+      "popularity": 1000.124,
+      "poster_path": "/5yvawJviOjb2nUFvHGXcCpGVTqy.jpg",
+      "release_date": "2021-06-30",
+      "title": "La Purga: Infinita",
+      "video": false,
+      "vote_average": 7.5,
+      "vote_count": 1058
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/nprqOIEfiMMQx16lgKeLf3rmPrR.jpg",
+      "genre_ids": [
+        28,
+        53,
+        18
+      ],
+      "id": 619297,
+      "original_language": "en",
+      "original_title": "Sweet Girl",
+      "overview": "Un marido destrozado jura llevar ante la justicia a los responsables de la muerte de su mujer, a la vez que protege a la única familia que le queda, su hija.",
+      "popularity": 812.706,
+      "poster_path": "/72KBb61fPaUDJWd2W8gG6xDhzzp.jpg",
+      "release_date": "2021-08-18",
+      "title": "Sweet Girl",
+      "video": false,
+      "vote_average": 6.8,
+      "vote_count": 259
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/8XiTPU1zfy41Xgg96TCHXj4uQJf.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "id": 429617,
+      "original_language": "en",
+      "original_title": "Spider-Man: Far From Home",
+      "overview": "Peter Parker decide irse junto a Michelle Jones, Ned y el resto de sus amigos a pasar unas vacaciones a Europa después de los eventos ocurridos en Vengadores: EndGame. Sin embargo, el plan de Parker por dejar de lado sus superpoderes durante unas semanas se ven truncados cuándo es reclutado por Nick Fury para unirse a Mysterio (un humano que proviene de la Tierra 833, una dimensión del multiverso, que tuvo su primera aparición en Doctor Strange) para luchar contra los elementales (cuatro entes inmortales que vienen de la misma dimensión y que dominan los cuatro elementos de la naturaleza, el fuego, el agua, el aire y la tierra) . En ese momento, Parker vuelve a ponerse el traje de Spider-Man para cumplir con  su labor.",
+      "popularity": 789.209,
+      "poster_path": "/iKVR1ba3W1wCm9bVCcpnNvxQUWX.jpg",
+      "release_date": "2019-06-28",
+      "title": "Spider-Man: Lejos de casa",
+      "video": false,
+      "vote_average": 7.5,
+      "vote_count": 10389
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/iJ2HVOZT9Kjayrhy21pbGIJs9ey.jpg",
+      "genre_ids": [
+        28,
+        12,
+        14
+      ],
+      "id": 525660,
+      "original_language": "cn",
+      "original_title": "真·三国无双",
+      "overview": "Dynasty Warriors es una próxima película de acción y fantasía de Hong Kong basada en la franquicia japonesa de videojuegos del mismo título.",
+      "popularity": 750.302,
+      "poster_path": "/1w0AkplNn51VZZ9ehA9I0hqJzLs.jpg",
+      "release_date": "2021-04-29",
+      "title": "Dynasty Warriors",
+      "video": false,
+      "vote_average": 6.7,
+      "vote_count": 60
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/9DZlZvgh9dIGcri79hv3KtHiq5K.jpg",
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "id": 637649,
+      "original_language": "en",
+      "original_title": "Wrath of Man",
+      "overview": "H (Jason Statham) es el misterioso tipo que acaba de incorporarse como guardia de seguridad en una compañía de blindados. Durante un intento de atraco a su camión, sorprende a sus compañeros mostrando habilidades de un soldado profesional, dejando al resto del equipo preguntándose quién es realmente y de dónde viene. Pronto se hará claro el verdadero motivo por el cual H está buscando un ajuste de cuentas.",
+      "popularity": 749.305,
+      "poster_path": "/emM894kjspdQsHyTAF7sjRNlbTr.jpg",
+      "release_date": "2021-04-22",
+      "title": "Despierta la furia",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 1989
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
+      "genre_ids": [
+        28,
+        14,
+        12
+      ],
+      "id": 460465,
+      "original_language": "en",
+      "original_title": "Mortal Kombat",
+      "overview": "Un boxeador fracasado descubre un secreto familiar que lo lleva a un torneo místico llamado Mortal Kombat donde se encuentra con un grupo de guerreros que luchan hasta la muerte para salvar los reinos del malvado hechicero Shang Tsung.",
+      "popularity": 689.626,
+      "poster_path": "/t2GbiMJfO8txoihdJC8RsfK1ds7.jpg",
+      "release_date": "2021-04-07",
+      "title": "Mortal Kombat",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 3625
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/xPpXYnCWfjkt3zzE0dpCNME1pXF.jpg",
+      "genre_ids": [
+        16,
+        28,
+        12,
+        14
+      ],
+      "id": 635302,
+      "original_language": "ja",
+      "original_title": "劇場版「鬼滅の刃」無限列車編",
+      "overview": "Tanjiro y sus compañeros se unen al Pilar de las Llamas Kyojuro Rengoku para investigar una misteriosa serie de desapariciones que han ocurrido dentro del “Tren Infinito”. Poco saben que Enmu, uno de los miembros de las Doce Lunas Demoníacas, también está a bordo y les ha preparado una trampa.",
+      "popularity": 687.305,
+      "poster_path": "/3f4ETSwknZs74lmUYC7ENIMRBMP.jpg",
+      "release_date": "2020-10-16",
+      "title": "Guardianes de la Noche: Tren infinito",
+      "video": false,
+      "vote_average": 8.4,
+      "vote_count": 1552
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
+      "genre_ids": [
+        28,
+        12,
+        14
+      ],
+      "id": 399566,
+      "original_language": "en",
+      "original_title": "Godzilla vs. Kong",
+      "overview": "Godzilla y Kong, dos de las fuerzas más poderosas de un planeta habitado por todo tipo de aterradoras criaturas, se enfrentan en un espectacular combate que sacude los cimientos de la humanidad. Monarch (Kyle Chandler) se embarca en una misión de alto riesgo y pone rumbo hacia territorios inexplorados para descubrir los orígenes de estos dos titanes, en un último esfuerzo por tratar de salvar a dos bestias que parecen tener las horas contadas sobre la faz de la Tierra.",
+      "popularity": 669.336,
+      "poster_path": "/yJTk4eqQd9Yo5REpFbTSOMkbSgn.jpg",
+      "release_date": "2021-03-24",
+      "title": "Godzilla vs. Kong",
+      "video": false,
+      "vote_average": 7.9,
+      "vote_count": 6775
+    }
+  ],
+  "total_pages": 500,
+  "total_results": 10000
+}

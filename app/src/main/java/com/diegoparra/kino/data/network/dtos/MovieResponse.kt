@@ -2,7 +2,7 @@ package com.diegoparra.kino.data.network.dtos
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieDto(
+data class MovieResponse(
     val id: String,
     @SerializedName("imdb_id") val imdbId: String?,
     val adult: Boolean?,

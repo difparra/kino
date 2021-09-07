@@ -12,8 +12,8 @@ import java.time.Instant
 abstract class FavouritesDao {
 
     @Query("Select movieId from Favourite")
-    protected abstract fun _getFavourites(): Flow<List<String>>
-    fun getFavourites(): Flow<List<String>> = _getFavourites().distinctUntilChanged()
+    protected abstract fun _observeFavourites(): Flow<List<String>>
+    fun observeFavourites(): Flow<List<String>> = _observeFavourites().distinctUntilChanged()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract suspend fun _addFavourite(favourite: Favourite)
@@ -25,11 +25,11 @@ abstract class FavouritesDao {
     abstract suspend fun removeFavourite(movieId: String)
 
     @Query("SELECT EXISTS(SELECT * FROM Favourite WHERE movieId = :movieId)")
-    protected abstract fun _isFavourite(movieId: String): Flow<Boolean>
-    fun isFavourite(movieId: String): Flow<Boolean> =
-        _isFavourite(movieId).distinctUntilChanged()
+    protected abstract fun _observeIsFavourite(movieId: String): Flow<Boolean>
+    fun observeIsFavourite(movieId: String): Flow<Boolean> =
+        _observeIsFavourite(movieId).distinctUntilChanged()
 
     @Query("SELECT EXISTS(SELECT * FROM Favourite WHERE movieId = :movieId)")
-    abstract fun isFavouriteSingle(movieId: String): Boolean
+    abstract fun isFavourite(movieId: String): Boolean
 
 }

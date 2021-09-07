@@ -18,7 +18,7 @@ interface MoviesApi {
     suspend fun getMoviesByGenre(@Query("with_genres") genreId: String): MoviesListResponse
 
     @GET("movie/{movie_id}")
-    suspend fun getMovieById(@Path("movie_id") movieId: String): MovieDto
+    suspend fun getMovieById(@Path("movie_id") movieId: String): MovieResponse
 
     @GET("movie/{movie_id}/credits")
     suspend fun getCredits(@Path("movie_id") movieId: String): CreditsResponse

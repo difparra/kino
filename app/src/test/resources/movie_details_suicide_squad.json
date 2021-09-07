@@ -1,0 +1,102 @@
+{
+  "adult": false,
+  "backdrop_path": "/jlGmlFOcfo8n5tURmhC7YVd4Iyy.jpg",
+  "belongs_to_collection": {
+    "id": 531242,
+    "name": "Escuadrón suicida - Colección",
+    "poster_path": "/eLIRUVotnG8yKOibckSvsnnd6Lp.jpg",
+    "backdrop_path": "/e0uUxFdhdGLcvy9eC7WlO2eLusr.jpg"
+  },
+  "budget": 180000000,
+  "genres": [
+    {
+      "id": 28,
+      "name": "Acción"
+    },
+    {
+      "id": 12,
+      "name": "Aventura"
+    },
+    {
+      "id": 14,
+      "name": "Fantasía"
+    },
+    {
+      "id": 35,
+      "name": "Comedia"
+    }
+  ],
+  "homepage": "https://www.thesuicidesquad.net",
+  "id": 436969,
+  "imdb_id": "tt6334354",
+  "original_language": "en",
+  "original_title": "The Suicide Squad",
+  "overview": "Un grupo de super villanos se encuentran encerrados en Belle Reve, una prisión de alta seguridad con la tasa de mortalidad más alta de Estados Unidos. Para salir de allí harán cualquier cosa, incluso unirse al grupo Task Force X, dedicado a llevar a cabo misiones suicidas bajo las órdenes de Amanda Waller. Fuertemente armados son enviados a la isla Corto Maltese, una jungla repleta de enemigos.",
+  "popularity": 3571.581,
+  "poster_path": "/fPJWlhXA2VXf4MlQ3JenVsz1iba.jpg",
+  "production_companies": [
+    {
+      "id": 9993,
+      "logo_path": "/2Tc1P3Ac8M479naPp1kYT3izLS5.png",
+      "name": "DC Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 128064,
+      "logo_path": "/13F3Jf7EFAcREU0xzZqJnVnyGXu.png",
+      "name": "DC Films",
+      "origin_country": "US"
+    },
+    {
+      "id": 507,
+      "logo_path": "/z7H707qUWigbjHnJDMfj6QITEpb.png",
+      "name": "Atlas Entertainment",
+      "origin_country": "US"
+    },
+    {
+      "id": 429,
+      "logo_path": "/2Tc1P3Ac8M479naPp1kYT3izLS5.png",
+      "name": "DC Comics",
+      "origin_country": "US"
+    },
+    {
+      "id": 11565,
+      "logo_path": null,
+      "name": "The Safran Company",
+      "origin_country": "US"
+    },
+    {
+      "id": 174,
+      "logo_path": "/IuAlhI9eVC9Z8UQWOIDdWRKSEJ.png",
+      "name": "Warner Bros. Pictures",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "2021-07-28",
+  "revenue": 140771711,
+  "runtime": 132,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "Se mueren por salvar el mundo.",
+  "title": "El Escuadrón Suicida",
+  "video": false,
+  "vote_average": 8,
+  "vote_count": 3026
+}

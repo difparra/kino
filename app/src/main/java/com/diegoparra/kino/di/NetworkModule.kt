@@ -2,6 +2,8 @@ package com.diegoparra.kino.di
 
 import com.diegoparra.kino.BuildConfig
 import com.diegoparra.kino.data.network.MoviesApi
+import com.diegoparra.kino.data.network.MoviesDtoMappers
+import com.diegoparra.kino.data.network.MoviesDtoMappersImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,6 +69,13 @@ object NetworkModule {
             .client(client)
             .build()
             .create(MoviesApi::class.java)
+    }
+
+
+    @Singleton
+    @Provides
+    fun providesMoviesDtoMappers(): MoviesDtoMappers {
+        return MoviesDtoMappersImpl()
     }
 
 }
