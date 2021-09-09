@@ -24,15 +24,18 @@ buildscript {
 
 
         junitVersion = '4.13.2'
+        androidJunitVersion = '1.1.3'
         truthVersion = '1.1.3'
         coroutinesTestVersion = '1.5.2'
         mockitoVersion = '3.12.4'
         androidXTestCoreVersion = '1.4.0-rc01'
-        androidXTestExtKotlinRunnerVersion = '1.1.3-rc01'
-        robolectricVersion = '4.6.1'
-
-        androidJunitVersion = '1.1.3'
         espressoVersion = '3.4.0'
+        archTestingVersion = '2.1.0'
+
+        //  In case robolectric is necessary in local unit tests (e.g. to get context, resources, etc)
+        //  this dependencies will be necessary, along with the androidX Test Core included before.
+        //androidXTestExtKotlinRunnerVersion = '1.1.3-rc01'
+        //robolectricVersion = '4.6.1'
     }
     repositories {
         google()

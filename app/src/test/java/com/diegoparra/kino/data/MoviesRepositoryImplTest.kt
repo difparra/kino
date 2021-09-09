@@ -18,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,19 +33,19 @@ class MoviesRepositoryImplTest {
     /*  // Can be used instead of @RunWith(MockitoJUnitRunner::class)
         @get:Rule val mockitoRule = MockitoJUnit.rule() */
 
+    private val testDispatcher = TestCoroutineDispatcher()
+
     @Mock
     private lateinit var moviesApi: MoviesApi
-
     private lateinit var favouritesDao: FavouritesDao
+
     private lateinit var moviesRepositoryImpl: MoviesRepositoryImpl
-
-    private val coroutineDispatcher = TestCoroutineDispatcher()
-
-    //  This does not save any state, so it is safe to call here rather than in setUp method
-    private val moviesDtoMappers: MoviesDtoMappers = MoviesDtoMappersImpl()
+    private val moviesDtoMappers: MoviesDtoMappers =
+        MoviesDtoMappersImpl()     //  This does not save any state, so it is safe to call here rather than in setUp method
 
 
-    //  Sample data to work in most of the methods, where some movieListResponse is returned
+    //      ----------      Sample data
+
     private val emptyMoviesListReponse = MoviesListResponse(1, emptyList(), 50, 1000)
     private val moviesListResponse = MoviesListResponse(
         1,
@@ -52,21 +53,31 @@ class MoviesRepositoryImplTest {
             FakeDtoData.Movies.suicideSquad.movieListItemDto,
             FakeDtoData.Movies.jungleCruise.movieListItemDto
         ),
-        50,
-        1000
+        50, 1000
     )
     private val parsedMoviesListResponse = moviesDtoMappers.toMoviesList(moviesListResponse)
 
+
+    //      ----------      setUp and tearDown methods
 
     @Before
     fun setUp() {
         favouritesDao = FakeFavouritesDao()
         moviesRepositoryImpl =
-            MoviesRepositoryImpl(moviesApi, moviesDtoMappers, favouritesDao, coroutineDispatcher)
+            MoviesRepositoryImpl(moviesApi, moviesDtoMappers, favouritesDao, testDispatcher)
     }
 
+    @After
+    fun tearDown() {
+        // make sure nothing else is scheduled to be executed after completing a test
+        testDispatcher.cleanupTestCoroutines()
+    }
+
+
+    //      ----------      tests
+
     @Test
-    fun getGenres_success_returnEitherRightGenresList() = coroutineDispatcher.runBlockingTest {
+    fun getGenres_success_returnEitherRightGenresList() = testDispatcher.runBlockingTest {
         val genre1 = FakeDtoData.Genres.action
         val genre2 = FakeDtoData.Genres.comedy
         val genresResponse = GenresResponse(listOf(genre1, genre2))
@@ -81,7 +92,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun getGenres_emptyList_returnEitherRightEmptyList() = coroutineDispatcher.runBlockingTest {
+    fun getGenres_emptyList_returnEitherRightEmptyList() = testDispatcher.runBlockingTest {
         Mockito.`when`(moviesApi.getGenres()).thenReturn(GenresResponse(emptyList()))
         val result = moviesRepositoryImpl.getGenres()
         Mockito.verify(moviesApi).getGenres()
@@ -91,7 +102,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun getGenres_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun getGenres_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val exception = NullPointerException()
 
         Mockito.`when`(moviesApi.getGenres()).thenThrow(exception)
@@ -104,7 +115,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun getMoviesByGenre_success_returnEitherRightMoviesList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val genreId = "28"
 
             Mockito.`when`(moviesApi.getMoviesByGenre(genreId)).thenReturn(moviesListResponse)
@@ -117,7 +128,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun getMoviesByGenre_emptyList_returnEitherRightEmptyList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val genreId = "28"
 
             Mockito.`when`(moviesApi.getMoviesByGenre(genreId)).thenReturn(emptyMoviesListReponse)
@@ -129,7 +140,7 @@ class MoviesRepositoryImplTest {
         }
 
     @Test
-    fun getMoviesByGenre_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun getMoviesByGenre_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val genreId = "28"
         val exception = NullPointerException()
 
@@ -142,7 +153,7 @@ class MoviesRepositoryImplTest {
 
 
     @Test
-    fun getMovieById_success_returnEitherRightMovie() = coroutineDispatcher.runBlockingTest {
+    fun getMovieById_success_returnEitherRightMovie() = testDispatcher.runBlockingTest {
         val movie = FakeDtoData.Movies.suicideSquad.movieResponse
         val movieId = movie.id
         val parsedMovie = moviesDtoMappers.toMovie(movie)
@@ -156,7 +167,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun getMovieById_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun getMovieById_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val movieId = "436969"
         val exception = NullPointerException()
 
@@ -169,7 +180,7 @@ class MoviesRepositoryImplTest {
 
 
     @Test
-    fun toggleFavourite_isNotFavourite_returnFavouriteTrue() = coroutineDispatcher.runBlockingTest {
+    fun toggleFavourite_isNotFavourite_returnFavouriteTrue() = testDispatcher.runBlockingTest {
         val movieId = "436969"
         assertThat(favouritesDao.isFavourite(movieId)).isFalse()
 
@@ -179,7 +190,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun toggleFavourite_isFavourite_returnFavouriteFalse() = coroutineDispatcher.runBlockingTest {
+    fun toggleFavourite_isFavourite_returnFavouriteFalse() = testDispatcher.runBlockingTest {
         val movieId = "436969"
         favouritesDao.addFavourite(movieId)
         assertThat(favouritesDao.isFavourite(movieId)).isTrue()
@@ -191,7 +202,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun toggleFavourite_pressedTwice_returnOriginalFavouriteState() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movieId = "436969"
             val originalState = favouritesDao.isFavourite(movieId)
 
@@ -204,7 +215,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun isFavourite_isFavouriteInDatabase_returnEitherRightTrue() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movieId = "436969"
             favouritesDao.addFavourite(movieId)
             assertThat(favouritesDao.isFavourite(movieId)).isTrue()
@@ -218,7 +229,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun isFavourite_isNotFavouriteInDatabase_returnEitherRightFalse() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movieId = "436969"
             assertThat(favouritesDao.isFavourite(movieId)).isFalse()
 
@@ -231,7 +242,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun isFavourite_toggleFavouriteFromFalseToTrueWhileObservingIsFavourite_returnFirstFalseAndSecondTrue() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movieId = "436969"
             assertThat(favouritesDao.isFavourite(movieId)).isFalse()
 
@@ -245,8 +256,8 @@ class MoviesRepositoryImplTest {
         }
 
     @Test
-    fun getFavourites_notAddedFavourites_returnEmptyList() = coroutineDispatcher.runBlockingTest {
-        val flowFavourites = favouritesDao.observeFavourites()
+    fun getFavourites_notAddedFavourites_returnEmptyList() = testDispatcher.runBlockingTest {
+        val flowFavourites = favouritesDao.observeFavouritesIds()
         assertThat(flowFavourites.first()).isEmpty()
 
         val flowResult = moviesRepositoryImpl.getFavourites()
@@ -258,7 +269,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun getFavourites_preloadedFavourites_returnListWithFavourites() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movie1 = FakeDtoData.Movies.suicideSquad.movieResponse
             val movie2 = FakeDtoData.Movies.jungleCruise.movieResponse
             val favourite1 = movie1.id
@@ -268,7 +279,7 @@ class MoviesRepositoryImplTest {
 
             favouritesDao.addFavourite(favourite1)
             favouritesDao.addFavourite(favourite2)
-            val favourites = favouritesDao.observeFavourites().first()
+            val favourites = favouritesDao.observeFavouritesIds().first()
             assertThat(favourites).containsExactly(favourite1, favourite2)
 
             Mockito.`when`(moviesApi.getMovieById(favourite1)).thenReturn(movie1)
@@ -286,7 +297,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun getFavourites_addedAndRemovedFavouriteWhileObserving_returnCorrectList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movie1 = FakeDtoData.Movies.suicideSquad.movieResponse
             val movie2 = FakeDtoData.Movies.jungleCruise.movieResponse
             val favourite1 = movie1.id
@@ -295,7 +306,7 @@ class MoviesRepositoryImplTest {
             val parsedMovie2 = moviesDtoMappers.toMovie(movie2)
 
             favouritesDao.addFavourite(favourite1)
-            val favourites = favouritesDao.observeFavourites().first()
+            val favourites = favouritesDao.observeFavouritesIds().first()
             assertThat(favourites).containsExactly(favourite1)
 
 
@@ -320,7 +331,7 @@ class MoviesRepositoryImplTest {
 
 
     @Test
-    fun getCredits_success_returnEitherRightCredits() = coroutineDispatcher.runBlockingTest {
+    fun getCredits_success_returnEitherRightCredits() = testDispatcher.runBlockingTest {
         val creditsResponse = FakeDtoData.Movies.suicideSquad.credits
         val movieId = creditsResponse.movieId
         val parsedCreditsResponse = moviesDtoMappers.toMovieCredits(creditsResponse)
@@ -334,7 +345,7 @@ class MoviesRepositoryImplTest {
     }
 
     @Test
-    fun getCredits_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun getCredits_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val movieId = "436969"
         val exception = NullPointerException()
 
@@ -347,7 +358,7 @@ class MoviesRepositoryImplTest {
 
 
     @Test
-    fun getSuggestions_success_returnEitherRightMoviesList() = coroutineDispatcher.runBlockingTest {
+    fun getSuggestions_success_returnEitherRightMoviesList() = testDispatcher.runBlockingTest {
         val movieId = "436969"
 
         Mockito.`when`(moviesApi.getSuggestions(movieId)).thenReturn(moviesListResponse)
@@ -360,7 +371,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun getSuggestions_emptyList_returnEitherRightEmptyList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val movieId = "436969"
 
             Mockito.`when`(moviesApi.getSuggestions(movieId)).thenReturn(emptyMoviesListReponse)
@@ -372,7 +383,7 @@ class MoviesRepositoryImplTest {
         }
 
     @Test
-    fun getSuggestions_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun getSuggestions_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val movieId = "436969"
         val exception = NullPointerException()
 
@@ -386,7 +397,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun searchMovieByName_success_returnEitherRightMoviesList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val title = "suic"
 
             Mockito.`when`(moviesApi.searchMovieByName(title)).thenReturn(moviesListResponse)
@@ -399,7 +410,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun searchMovieByName_emptyList_returnEitherRightEmptyList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val title = "abcde"
 
             Mockito.`when`(moviesApi.searchMovieByName(title)).thenReturn(emptyMoviesListReponse)
@@ -411,7 +422,7 @@ class MoviesRepositoryImplTest {
         }
 
     @Test
-    fun searchMovieByName_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun searchMovieByName_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val title = "abcde"
         val exception = NullPointerException()
 
@@ -425,7 +436,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun searchPeopleByName_success_returnEitherRightMoviesList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val name = "margot robbie"
             val peopleListResponse = PersonListResponse(
                 1,
@@ -445,7 +456,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun searchPeopleByName_emptyList_returnEitherRightEmptyList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val name = "abcde"
             val emptyPeopleListResponse = PersonListResponse(1, emptyList(), 50, 1000)
 
@@ -458,7 +469,7 @@ class MoviesRepositoryImplTest {
         }
 
     @Test
-    fun searchPeopleByName_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun searchPeopleByName_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val name = "abcde"
         val exception = NullPointerException()
 
@@ -472,7 +483,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun searchMovieByActorId_success_returnEitherRightMoviesList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val actorId = "123"
 
             Mockito.`when`(moviesApi.searchMovieByActorId(actorId)).thenReturn(moviesListResponse)
@@ -485,7 +496,7 @@ class MoviesRepositoryImplTest {
 
     @Test
     fun searchMovieByActorId_emptyList_returnEitherRightEmptyList() =
-        coroutineDispatcher.runBlockingTest {
+        testDispatcher.runBlockingTest {
             val actorId = "123"
 
             Mockito.`when`(moviesApi.searchMovieByActorId(actorId))
@@ -498,7 +509,7 @@ class MoviesRepositoryImplTest {
         }
 
     @Test
-    fun searchMovieByActorId_error_returnEitherLeft() = coroutineDispatcher.runBlockingTest {
+    fun searchMovieByActorId_error_returnEitherLeft() = testDispatcher.runBlockingTest {
         val actorId = "123"
         val exception = NullPointerException()
 

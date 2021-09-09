@@ -61,7 +61,7 @@ class MoviesRepositoryImpl @Inject constructor(
     }
 
     override fun getFavourites(): Flow<Either<Exception, List<Movie>>> {
-        return favouritesDao.observeFavourites()
+        return favouritesDao.observeFavouritesIds()
             .map {
                 coroutineScope {
                     val moviesAsyncList = it.map { movieId ->

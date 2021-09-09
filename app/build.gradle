@@ -55,6 +55,12 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    /*  //  In case robolectric and androidX Test libraries requires resources or manifest for
+        //  local unit tests add these lines:
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }*/
 }
 
 dependencies {
@@ -155,14 +161,21 @@ dependencies {
     testImplementation "com.google.truth:truth:$truthVersion"      //  Easily write assertions
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"   //  Kotlin coroutines test
     testImplementation "org.mockito:mockito-core:$mockitoVersion"        //  Mockito framework
+    /*
+    //  Testing dependencies necessary to setUp androidX test and robolectric in local unit test
+    //  for getting context, resources, etc.
     testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
     testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    */
 
     androidTestImplementation "androidx.test.ext:junit:$androidJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "com.google.truth:truth:$truthVersion"                //  Easily write assertions
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"        //  Kotlin coroutines test
+    androidTestImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"     //  Test dependency for arch components (such as room and liveData)
+    androidTestImplementation "androidx.arch.core:core-testing:$archTestingVersion"
+
 
     /*
     //  More possibly useful dependencies, but that are still not being used in this project include:

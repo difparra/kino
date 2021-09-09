@@ -1,5 +1,7 @@
 package com.diegoparra.kino.data.network
 
+import androidx.annotation.VisibleForTesting
+import com.diegoparra.kino.data.network.MoviesDtoMappers.Companion.NO_INFO_AVAILABLE
 import com.diegoparra.kino.data.network.dtos.*
 import com.diegoparra.kino.models.*
 import timber.log.Timber
@@ -13,9 +15,10 @@ class MoviesDtoMappersImpl : MoviesDtoMappers {
         return genresResponse.genres.map { it.toGenre() }
     }
 
-    private fun GenreDto.toGenre() = Genre(
+    @VisibleForTesting
+    fun GenreDto.toGenre() = Genre(
         id = id,
-        name = name ?: "Unknown"
+        name = name ?: NO_INFO_AVAILABLE
     )
 
 
@@ -25,13 +28,13 @@ class MoviesDtoMappersImpl : MoviesDtoMappers {
         return moviesListResponse.results.map { it.toMovie() }
     }
 
-    private fun MovieListItemDto.toMovie() = Movie(
+    @VisibleForTesting
+    fun MovieListItemDto.toMovie() = Movie(
         id = id,
-        title = (if (originalLanguage != "en" && title != null) title else originalTitle)
-            ?: "No title",
-        posterUrl = MoviesApi.IMAGE_URL_PREFIX + posterPath,
-        backdropUrl = MoviesApi.IMAGE_URL_PREFIX + backdropPath,
-        overview = overview ?: "No description",
+        title = if(!title.isNullOrBlank()) title else originalTitle ?: NO_INFO_AVAILABLE,
+        posterUrl = posterPath?.let { MoviesApi.IMAGE_URL_PREFIX + it } ?: NO_INFO_AVAILABLE,
+        backdropUrl = backdropPath?.let { MoviesApi.IMAGE_URL_PREFIX + it } ?: NO_INFO_AVAILABLE,
+        overview = overview ?: NO_INFO_AVAILABLE,
         genreIds = genreIds ?: emptyList(),
         rating = voteAverage?.let { (it * 10).toInt() },
         releaseDate = parseLocalDateOrNull(releaseDate, movieId = id),
@@ -45,11 +48,10 @@ class MoviesDtoMappersImpl : MoviesDtoMappers {
         return with(movieResponse) {
             Movie(
                 id = id,
-                title = (if (originalLanguage != "en" && title != null) title else originalTitle)
-                    ?: "No title",
-                posterUrl = MoviesApi.IMAGE_URL_PREFIX + posterPath,
-                backdropUrl = MoviesApi.IMAGE_URL_PREFIX + backdropPath,
-                overview = overview ?: "No description",
+                title = if(!title.isNullOrBlank()) title else originalTitle ?: NO_INFO_AVAILABLE,
+                posterUrl = posterPath?.let { MoviesApi.IMAGE_URL_PREFIX + it } ?: NO_INFO_AVAILABLE,
+                backdropUrl = backdropPath?.let { MoviesApi.IMAGE_URL_PREFIX + it } ?: NO_INFO_AVAILABLE,
+                overview = overview ?: NO_INFO_AVAILABLE,
                 genreIds = genres?.map { it.id } ?: emptyList(),
                 rating = voteAverage?.let { (it * 10).toInt() },
                 releaseDate = parseLocalDateOrNull(releaseDate, movieId = id),
@@ -70,26 +72,28 @@ class MoviesDtoMappersImpl : MoviesDtoMappers {
             producer = creditsResponse.crew
                 .find { it.job.equals("Producer", ignoreCase = true) }?.toPeople()
                 ?: People(
-                    id = "", name = "", profilePicUrl = "",
-                    department = People.Department.PRODUCTION, knownFor = null
+                    id = NO_INFO_AVAILABLE, name = NO_INFO_AVAILABLE, profilePicUrl = NO_INFO_AVAILABLE,
+                    department = People.Department.UNKNOWN, knownFor = null
                 )
         )
     }
 
-    private fun CastDto.toCharacter() = Character(
+    @VisibleForTesting
+    fun CastDto.toCharacter() = Character(
         actor = People(
             id = id,
-            name = name ?: "",
+            name = name ?: NO_INFO_AVAILABLE,
             profilePicUrl = MoviesApi.IMAGE_URL_PREFIX + profilePath,
             department = People.Department.ACTING,
             knownFor = null
         ),
-        character = character ?: ""
+        character = character ?: NO_INFO_AVAILABLE
     )
 
-    private fun CrewDto.toPeople() = People(
+    @VisibleForTesting
+    fun CrewDto.toPeople() = People(
         id = id,
-        name = name ?: "",
+        name = name ?: NO_INFO_AVAILABLE,
         profilePicUrl = MoviesApi.IMAGE_URL_PREFIX + profilePath,
         department = People.Department.PRODUCTION,
         knownFor = null
@@ -102,9 +106,10 @@ class MoviesDtoMappersImpl : MoviesDtoMappers {
         return personListResponse.results.map { it.toPeople() }
     }
 
-    private fun PersonListItemDto.toPeople() = People(
+    @VisibleForTesting
+    fun PersonListItemDto.toPeople() = People(
         id = id,
-        name = name ?: "",
+        name = name ?: NO_INFO_AVAILABLE,
         profilePicUrl = MoviesApi.IMAGE_URL_PREFIX + profilePath,
         department = when (knownForDepartment) {
             "Acting" -> People.Department.ACTING
@@ -129,7 +134,8 @@ class MoviesDtoMappersImpl : MoviesDtoMappers {
      *
      * Date is intended to be formatted as: e.g. 2020-10-27
      */
-    private fun parseLocalDateOrNull(date: String?, movieId: String?): LocalDate? {
+    @VisibleForTesting
+    fun parseLocalDateOrNull(date: String?, movieId: String? = null): LocalDate? {
         return if (date.isNullOrEmpty()) {
             null
         } else {

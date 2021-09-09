@@ -48,4 +48,36 @@ NOTES:
     In addition, Long can be used instead of instant, as they are basically the same, but, having instant is more readable, and is less likely to make some mistake about giving a seconds or milliseconds value.
 
     Using LocalDateTime, as it can't be directly saved in database, and when parsing I have to take care of timeZones is more prone to errors.
+
+
+
+- SupervisorJob
+
+A coroutine scope can be created using a supervisorJob as CoroutineScope(SupervisorJob())
+so that exception won't propagate to other children, it will let the child itself (the one that
+throw the exception) handle it.
+However, if exception is not handled, and the CoroutineContext does not have a CoroutineExceptionHandler,
+it will eventually reach the defaul thread's ExceptionHandler, which in Android will make the app
+crash regardless of the Dispatcher.
+
+Example: With Supervisor Job:
+val scope = CoroutineScope(SupervisorJob())
+scope.launch {// Child 1}
+scope.launch {// Child 2}
+In this case, if child1 fails, neither scope nor child2 will be cancelled.
+
+
+More:
+val scope = CoroutineScope(Job())
+scope.launch(SupervisorJob()) {
+    // new coroutine -> can suspend
+   launch {
+        // Child 1
+    }
+    launch {
+        // Child 2
+    }
+}
+In this case, child1's parent job is of type Job. SupervisoJob is not doing anything.
+
  */

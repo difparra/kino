@@ -43,7 +43,11 @@ class FakeFavouritesDao(private val initialData: List<Favourite> = emptyList()) 
         return favouritesData.values.toList()
     }
 
-    override fun _observeFavourites(): Flow<List<String>> {
+    override fun getFavouritesIds(): List<String> {
+        return getFavourites().map { it.movieId }
+    }
+
+    override fun _observeFavouritesIds(): Flow<List<String>> {
         return favouritesFlow.map { it.map { it.movieId } }
     }
 

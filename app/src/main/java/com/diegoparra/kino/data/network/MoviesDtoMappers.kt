@@ -14,4 +14,8 @@ interface MoviesDtoMappers {
     fun toMovieCredits(creditsResponse: CreditsResponse): MovieCredits
     fun toPeopleList(personListResponse: PersonListResponse): List<People>
 
+    companion object {
+        const val NO_INFO_AVAILABLE = "No information available"
+    }
+
 }

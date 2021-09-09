@@ -1,5 +1,6 @@
 package com.diegoparra.kino.utils
 
+import com.diegoparra.kino.test_utils.assertThrows
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -19,14 +20,8 @@ class NumberUtilsTest {
 
     @Test
     fun roundToMultiple_multiple0_throwIllegalArgumentException() {
-        var isException = false
-        try {
+        assertThrows<IllegalArgumentException> {
             1f.roundToMultiple(multiple = 0f)
-        } catch (e: Exception) {
-            isException = true
-            assertThat(e).isInstanceOf(IllegalArgumentException::class.java)
-        } finally {
-            assertThat(isException).isTrue()
         }
     }
 
