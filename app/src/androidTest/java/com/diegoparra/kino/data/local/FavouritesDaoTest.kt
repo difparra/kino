@@ -21,13 +21,12 @@ import org.junit.runner.RunWith
 @SmallTest
 class FavouritesDaoTest {
 
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
-
+    private val testDispatcher = TestCoroutineScope()
     private lateinit var database: KinoDatabase
     private lateinit var dao: FavouritesDao
 
-    private val testDispatcher = TestCoroutineScope()
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun initDb() {
@@ -42,6 +41,9 @@ class FavouritesDaoTest {
 
     @After
     fun closeDb() = database.close()
+
+    @After
+    fun cleanTestDispatcher() = testDispatcher.cleanupTestCoroutines()
 
 
     //      ----------      ADD FAVOURITE       ----------------------------------------------------
@@ -60,34 +62,36 @@ class FavouritesDaoTest {
     }
 
     @Test
-    fun addFavourite_addingAlreadyLoadedItem_replacePreviousLoadedAndDoesNotAdmitDuplicates() = testDispatcher.runBlockingTest {
-        dao.addFavourite("123")
-        assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123"))
+    fun addFavourite_addingAlreadyLoadedItem_replacePreviousLoadedAndDoesNotAdmitDuplicates() =
+        testDispatcher.runBlockingTest {
+            dao.addFavourite("123")
+            assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123"))
 
-        dao.addFavourite("123")
-        val result = dao.getFavouritesIds()
-        assertThat(result).isEqualTo(listOf("123"))
-        assertThat(result).containsNoDuplicates()
-    }
+            dao.addFavourite("123")
+            val result = dao.getFavouritesIds()
+            assertThat(result).isEqualTo(listOf("123"))
+            assertThat(result).containsNoDuplicates()
+        }
 
 
     //      ----------      REMOVE FAVOURITE       -------------------------------------------------
 
     @Test
-    fun removeFavourite_removeIndividualItem_And_RemoveUntilListIsEmpty()= testDispatcher.runBlockingTest {
-        dao.addFavourite("123")
-        dao.addFavourite("456")
-        assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123", "456"))
+    fun removeFavourite_removeIndividualItem_And_RemoveUntilListIsEmpty() =
+        testDispatcher.runBlockingTest {
+            dao.addFavourite("123")
+            dao.addFavourite("456")
+            assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123", "456"))
 
-        dao.removeFavourite("456")
-        assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123"))
+            dao.removeFavourite("456")
+            assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123"))
 
-        dao.removeFavourite("123")
-        assertThat(dao.getFavouritesIds()).isEmpty()
-    }
+            dao.removeFavourite("123")
+            assertThat(dao.getFavouritesIds()).isEmpty()
+        }
 
     @Test
-    fun removeFavourite_removeNonExistentFavouriteDoesNothing()= testDispatcher.runBlockingTest {
+    fun removeFavourite_removeNonExistentFavouriteDoesNothing() = testDispatcher.runBlockingTest {
         dao.addFavourite("123")
         dao.addFavourite("456")
         assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123", "456"))
@@ -100,19 +104,19 @@ class FavouritesDaoTest {
     //      ----------      OBSERVE FAVOURITES       -----------------------------------------------
 
     @Test
-    fun observeFavouritesIds_favAddedAndRemoved_flowEmitCorrectValues() = testDispatcher.runBlockingTest {
-        assertThat(dao.getFavouritesIds()).isEmpty()
+    fun observeFavouritesIds_favAddedAndRemoved_flowEmitCorrectValues() =
+        testDispatcher.runBlockingTest {
+            assertThat(dao.getFavouritesIds()).isEmpty()
 
-        val favouritesFlow = dao.observeFavouritesIds()
-        assertThat(favouritesFlow.first()).isEmpty()
+            val favouritesFlow = dao.observeFavouritesIds()
+            assertThat(favouritesFlow.first()).isEmpty()
 
-        dao.addFavourite("123")
-        assertThat(favouritesFlow.first()).isEqualTo(listOf("123"))
+            dao.addFavourite("123")
+            assertThat(favouritesFlow.first()).isEqualTo(listOf("123"))
 
-        dao.removeFavourite("123")
-        assertThat(favouritesFlow.first()).isEqualTo(emptyList<String>())
-    }
-
+            dao.removeFavourite("123")
+            assertThat(favouritesFlow.first()).isEqualTo(emptyList<String>())
+        }
 
 
     //      ----------      IS FAVOURITE       ----------------------------------------------------
@@ -136,18 +140,19 @@ class FavouritesDaoTest {
     }
 
     @Test
-    fun observeIsFavourite_favAddedAndRemoved_flowEmitCorrectValues() = testDispatcher.runBlockingTest {
-        dao.addFavourite("123")
-        assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123"))
+    fun observeIsFavourite_favAddedAndRemoved_flowEmitCorrectValues() =
+        testDispatcher.runBlockingTest {
+            dao.addFavourite("123")
+            assertThat(dao.getFavouritesIds()).isEqualTo(listOf("123"))
 
-        val isFavouriteFlow = dao.observeIsFavourite("456")
-        assertThat(isFavouriteFlow.first()).isFalse()
+            val isFavouriteFlow = dao.observeIsFavourite("456")
+            assertThat(isFavouriteFlow.first()).isFalse()
 
-        dao.addFavourite("456")
-        assertThat(isFavouriteFlow.first()).isTrue()
+            dao.addFavourite("456")
+            assertThat(isFavouriteFlow.first()).isTrue()
 
-        dao.removeFavourite("456")
-        assertThat(isFavouriteFlow.first()).isFalse()
-    }
+            dao.removeFavourite("456")
+            assertThat(isFavouriteFlow.first()).isFalse()
+        }
 
 }

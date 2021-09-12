@@ -2,7 +2,7 @@ package com.diegoparra.kino.data
 
 import com.diegoparra.kino.data.local.FakeFavouritesDao
 import com.diegoparra.kino.data.local.FavouritesDao
-import com.diegoparra.kino.data.network.FakeDtoData
+import com.diegoparra.kino.test_utils.FakeDtoData
 import com.diegoparra.kino.data.network.MoviesApi
 import com.diegoparra.kino.data.network.MoviesDtoMappers
 import com.diegoparra.kino.data.network.MoviesDtoMappersImpl

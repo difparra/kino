@@ -1,4 +1,4 @@
-package com.diegoparra.kino.data.network
+package com.diegoparra.kino.test_utils
 
 import com.diegoparra.kino.data.network.dtos.*
 

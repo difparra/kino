@@ -1,5 +1,6 @@
 package com.diegoparra.kino.ui.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.*
 import com.diegoparra.kino.data.MoviesRepository
 import com.diegoparra.kino.models.Genre
@@ -28,6 +29,8 @@ class HomeViewModel @Inject constructor(
     val loading: Flow<Boolean> = _loading
 
     private val _genres = MutableStateFlow<List<Genre>>(emptyList())
+    @VisibleForTesting
+    val genres: Flow<List<Genre>> = _genres
     init {
         viewModelScope.launch {
             _loading.value = true

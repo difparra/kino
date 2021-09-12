@@ -5,6 +5,7 @@ import com.diegoparra.kino.models.Character
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.models.People
+import com.diegoparra.kino.test_utils.FakeDtoData
 import com.diegoparra.kino.test_utils.Patterns
 import com.diegoparra.kino.test_utils.assertThrows
 import com.google.common.truth.Truth.assertThat
