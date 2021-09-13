@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.GenreWithMovies
 import com.diegoparra.kino.models.Movie
-import com.diegoparra.kino.ui.GenresFakes
+import com.diegoparra.kino.ui._utils.GenresFakes
 import com.diegoparra.kino.ui.theme.Dimens
 import com.diegoparra.kino.ui._utils.BasicErrorMessage
 import com.diegoparra.kino.ui._utils.BasicLoading

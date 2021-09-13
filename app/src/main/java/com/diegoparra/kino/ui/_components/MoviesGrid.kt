@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.diegoparra.kino.models.Movie
-import com.diegoparra.kino.ui.MoviesFakes
+import com.diegoparra.kino.ui._utils.MoviesFakes
 import com.diegoparra.kino.ui.theme.Dimens
 import com.diegoparra.kino.ui.theme.KinoTheme
 

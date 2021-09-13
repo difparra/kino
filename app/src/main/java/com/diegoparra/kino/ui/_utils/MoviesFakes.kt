@@ -1,4 +1,4 @@
-package com.diegoparra.kino.ui
+package com.diegoparra.kino.ui._utils
 
 import com.diegoparra.kino.models.Genre
 import com.diegoparra.kino.models.GenreWithMovies

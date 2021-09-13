@@ -161,6 +161,7 @@ dependencies {
     testImplementation "com.google.truth:truth:$truthVersion"      //  Easily write assertions
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVersion"   //  Kotlin coroutines test
     testImplementation "org.mockito:mockito-core:$mockitoVersion"        //  Mockito framework
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
     /*
     //  Testing dependencies necessary to setUp androidX test and robolectric in local unit test
     //  for getting context, resources, etc.

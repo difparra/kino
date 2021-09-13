@@ -58,42 +58,6 @@ class SearchViewModel @Inject constructor(
     }
 
 
-    /*
-//        Simplest option: It is working, but it does not define loading state.
-//        It could be defined in another variable, but does not seem to be right to have two variables
-//        defining the SearchResultState when I can have just one.
-//        Another option may be using flatMapLatest, and defining the request to repository inside a
-//        flow, that can add onStart emitting a loading state value. It is a valid option, and is
-//        great if data from repo is directly coming as flow, but if it is coming as a single value,
-//        from a suspend function, it may be better to simply collect the queryFlow, and defined values
-//        of _moviesResult MutableStateFlow in there.
-
-    val moviesResult = query
-        .map { query ->
-            if (query.isEmpty()) {
-                Timber.d("returning query is empty")
-                SearchResultState.EmptyQuery
-            } else {
-                moviesRepository.searchMovieByName(query).fold(
-                    onSuccess = { results ->
-                        if (results.isEmpty()) {
-                            Timber.d("returning no results")
-                            SearchResultState.NoResults
-                        } else {
-                            Timber.d("returning results")
-                            SearchResultState.Success(results)
-                        }
-                    },
-                    onFailure = {
-                        Timber.d("returning failure")
-                        SearchResultState.Failure(it)
-                    }
-                )
-            }
-        }
-     */
-
-
     companion object {
         const val QUERY_SAVED_STATE_KEY = "query"
     }

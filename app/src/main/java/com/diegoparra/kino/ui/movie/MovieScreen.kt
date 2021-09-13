@@ -25,7 +25,7 @@ import com.diegoparra.kino.models.Movie
 import com.diegoparra.kino.ui.theme.Dimens
 import com.diegoparra.kino.utils.Resource
 import com.diegoparra.kino.R
-import com.diegoparra.kino.ui.MoviesFakes
+import com.diegoparra.kino.ui._utils.MoviesFakes
 import com.diegoparra.kino.ui._components.SimpleRatingBar
 import com.diegoparra.kino.ui.theme.ColorControl
 import com.diegoparra.kino.ui.theme.KinoTheme

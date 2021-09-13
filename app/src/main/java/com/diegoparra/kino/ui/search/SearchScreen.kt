@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.diegoparra.kino.R
 import com.diegoparra.kino.models.Movie
-import com.diegoparra.kino.ui.MoviesFakes
+import com.diegoparra.kino.ui._utils.MoviesFakes
 import com.diegoparra.kino.ui._components.SearchBar
 import com.diegoparra.kino.ui._components.SimpleRatingBar
 import com.diegoparra.kino.ui._utils.BasicErrorMessage

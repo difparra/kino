@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.diegoparra.kino.models.Movie
-import com.diegoparra.kino.ui.MoviesFakes
+import com.diegoparra.kino.ui._utils.MoviesFakes
 import com.diegoparra.kino.ui._utils.KinoImage
 import com.diegoparra.kino.ui.theme.KinoTheme
 
